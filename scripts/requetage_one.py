@@ -41,7 +41,7 @@ token = obtenir_token(ID_CLIENT, SECRET_CLIENT)
 
 if token:
     # Choix du chemin : manuel ou Airlfow
-    nom_fichier = 'data/mon_dataset_wow.csv'
+    nom_fichier = '../data/mon_dataset_wow.csv'
     # nom_fichier = '/opt/airflow/data/mon_dataset_wow.csv'
     
     with open(nom_fichier, mode='w', newline='', encoding='utf-8') as fichier:
