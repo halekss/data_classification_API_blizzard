@@ -31,7 +31,7 @@ jobs:
         env:
           ID_CLIENT: ${{ secrets.ID_CLIENT }}
           SECRET_CLIENT: ${{ secrets.SECRET_CLIENT }}
-        run: python scripts/requetage_one.py
+        run: cd scripts && python requetage_one.py
 
       # Étape 5 : Sauvegarder et pousser le fichier CSV généré sur le dépôt
       - name: Commit et Push du fichier CSV
