@@ -1,0 +1,48 @@
+name: WoW Character List
+
+on:
+    schedule:
+        cron: '47 23 * * *'
+    workflow_dispacth:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  run-wow-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1 : Récupérer le code source du dépôt
+      - name: Récupérer le code du dépôt
+        uses: actions/checkout@v4
+
+      # Étape 2 : Installer Python sur la machine virtuelle
+      - name: Configurer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Étape 3 : Installer les dépendances nécessaires au script
+      - name: Installer les dépendances
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas
+
+      # Étape 4 : Exécuter le script Python avec les secrets d'environnement
+      - name: Exécuter le script de requêtage
+        env:
+          ID_CLIENT: ${{ secrets.ID_CLIENT }}
+          SECRET_CLIENT: ${{ secrets.SECRET_CLIENT }}
+        run: python scripts/requetage_one.py
+
+      # Étape 5 : Sauvegarder et pousser le fichier CSV généré sur le dépôt
+      - name: Commit et Push du fichier CSV
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          # Remplace 'ton_fichier.csv' par le nom exact du fichier généré par ton script
+          git add *.csv
+          # Le script ne fait un commit que si le fichier CSV a été modifié ou créé
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Mise à jour automatique des personnages WoW [skip ci]" && git push)
+

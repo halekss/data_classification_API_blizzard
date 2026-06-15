@@ -1,0 +1,5 @@
+config.py
+request_api_wow.py
+.venv
+__pycache__
+.env

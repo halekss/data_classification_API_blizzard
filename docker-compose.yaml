@@ -1,0 +1,16 @@
+version: '3'
+services:
+  airflow:
+    image: apache/airflow:latest-python3.11
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - _AIRFLOW_WWW_USER_USERNAME=admin
+      - _AIRFLOW_WWW_USER_PASSWORD=admin
+      - _PIP_ADDITIONAL_REQUIREMENTS=requests pandas
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./data:/opt/airflow/data
+    ports:
+      - "8080:8080"
+    command: standalone
