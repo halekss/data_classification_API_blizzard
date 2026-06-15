@@ -39,7 +39,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           # Remplace 'ton_fichier.csv' par le nom exact du fichier généré par ton script
-          git add *.csv
+          git add data/mon_dataset_wow.csv
           # Le script ne fait un commit que si le fichier CSV a été modifié ou créé
           git diff --quiet && git diff --staged --quiet || (git commit -m "Mise à jour automatique des personnages WoW [skip ci]" && git push)
 
