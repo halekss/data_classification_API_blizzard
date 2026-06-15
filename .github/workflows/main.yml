@@ -1,9 +1,9 @@
 name: WoW Character List
 
 on:
-    schedule:
-        cron: '47 23 * * *'
-    workflow_dispacth:
+  schedule:
+    - cron: '47 23 * * *' 
+  workflow_dispatch: # Permet de le lancer manuellement quand tu veux
 
 jobs:
   run-wow-script:
