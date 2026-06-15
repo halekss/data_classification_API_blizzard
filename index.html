@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roster WoW — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── CONFIG ── Modifier ces valeurs selon ton setup ──────────────────── */
+    /* URL du CSV sur GitHub raw (utilisé si pas en local)                   */
+    /* Voir la variable CONFIG dans le script plus bas                        */
+    /* ───────────────────────────────────────────────────────────────────── */
+
+    :root {
+      --gold: #C8A84B;
+      --gold-light: #F0D580;
+      --dark: #0A0812;
+      --panel: #13101E;
+      --panel2: #1C1730;
+      --border: #3A2E5E;
+      --border-gold: #6B5420;
+      --parchment: #F0E6C8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--dark);
+      color: var(--parchment);
+      font-family: 'Crimson Text', Georgia, serif;
+      font-size: 16px;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────────────────── */
+    .header {
+      background: #1C1730;
+      border-bottom: 2px solid var(--gold);
+      padding: 1.25rem 2rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .header-left { display: flex; align-items: center; gap: 1rem; }
+
+    .logo {
+      width: 48px; height: 48px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 22px; font-weight: 700;
+      color: #0A0812;
+      border: 2px solid var(--gold-light);
+      flex-shrink: 0;
+    }
+
+    .title {
+      font-family: 'Cinzel', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      font-size: 12px; color: #777;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .refresh-info {
+      font-size: 12px; color: #666;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.04em;
+    }
+
+    .refresh-info span { color: var(--gold); }
+
+    .btn {
+      font-family: 'Cinzel', serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 7px 14px;
+      border-radius: 3px;
+      border: 1px solid var(--border-gold);
+      background: rgba(200,168,75,0.1);
+      color: var(--gold);
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { background: rgba(200,168,75,0.2); }
+    .btn:active { transform: scale(0.97); }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #444;
+      display: inline-block;
+      margin-right: 6px;
+      transition: background 0.3s;
+    }
+
+    .status-dot.ok { background: #44CC44; }
+    .status-dot.loading { background: #CC8800; animation: pulse 1s infinite; }
+    .status-dot.error { background: #CC2200; }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ── TABS ────────────────────────────────────────────────────────────── */
+    .tabs {
+      display: flex; gap: 2px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab {
+      font-family: 'Cinzel', serif;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 9px 16px;
+      cursor: pointer;
+      color: #777;
+      border: none; background: transparent;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+
+    .tab:hover { color: var(--parchment); }
+
+    .tab.active {
+      color: var(--gold);
+      border-bottom: 2px solid var(--gold);
+      background: rgba(200,168,75,0.06);
+    }
+
+    /* ── LAYOUT ──────────────────────────────────────────────────────────── */
+    .content { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px; font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-gold);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+    /* ── STAT CARDS ──────────────────────────────────────────────────────── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 10px; color: #666;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 26px; font-weight: 600;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+    }
+
+    .stat-sub { font-size: 11px; color: #555; margin-top: 2px; }
+
+    /* ── CHAMPION ────────────────────────────────────────────────────────── */
+    .champion-banner {
+      background: var(--panel);
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      padding: 14px 18px;
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 1.5rem;
+      position: relative; overflow: hidden;
+    }
+
+    .champion-banner::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .champion-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif; font-weight: 700; font-size: 16px;
+      flex-shrink: 0;
+      border: 2px solid var(--gold);
+    }
+
+    .champion-name {
+      font-family: 'Cinzel', serif;
+      font-size: 17px; font-weight: 700;
+      color: var(--gold);
+    }
+
+    .champion-meta { font-size: 13px; color: #999; margin-top: 3px; }
+
+    .champion-ilvl { margin-left: auto; text-align: right; flex-shrink: 0; }
+    .ilvl-big { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: var(--gold); }
+    .ilvl-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── CHAR LIST ───────────────────────────────────────────────────────── */
+    .char-list { display: flex; flex-direction: column; gap: 4px; }
+
+    .char-row {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 8px 12px;
+      transition: border-color 0.15s;
+    }
+
+    .char-row:hover { border-color: #5A4A8A; }
+    .char-row.highlight { border-left: 3px solid var(--gold); }
+
+    .char-rank {
+      font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+      color: #555; width: 20px; text-align: center; flex-shrink: 0;
+    }
+
+    .char-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+    .char-name {
+      font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
+      flex: 1; min-width: 0; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .char-meta { font-size: 12px; color: #777; white-space: nowrap; }
+    .char-realm { font-size: 11px; color: #555; white-space: nowrap; display: none; }
+
+    .char-ilvl {
+      font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600;
+      color: #ccc; min-width: 38px; text-align: right; flex-shrink: 0;
+    }
+
+    .char-row.highlight .char-ilvl { color: var(--gold); }
+
+    /* ── BARRES ──────────────────────────────────────────────────────────── */
+    .bars { display: flex; flex-direction: column; gap: 7px; }
+
+    .bar-row { display: flex; align-items: center; gap: 10px; }
+
+    .bar-label {
+      font-family: 'Cinzel', serif; font-size: 11px; color: #bbb;
+      min-width: 150px; max-width: 150px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .bar-track {
+      flex: 1; height: 14px;
+      background: var(--panel2);
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .bar-fill { height: 100%; border-radius: 2px; }
+
+    .bar-val {
+      font-family: 'Cinzel', serif; font-size: 11px;
+      color: var(--gold); min-width: 36px; text-align: right;
+    }
+
+    .bar-count { font-size: 10px; color: #555; min-width: 28px; text-align: right; }
+
+    .badge-top {
+      font-family: 'Cinzel', serif; font-size: 9px; font-weight: 700;
+      background: var(--gold); color: #0A0812;
+      padding: 1px 5px; border-radius: 2px; letter-spacing: 0.05em;
+      margin-left: 4px;
+    }
+
+    .badge-bot {
+      font-family: 'Cinzel', serif; font-size: 9px; font-weight: 700;
+      background: #5A1A1A; color: #FF8888;
+      padding: 1px 5px; border-radius: 2px; letter-spacing: 0.05em;
+      margin-left: 4px;
+    }
+
+    /* ── GRILLES ─────────────────────────────────────────────────────────── */
+    .grid-auto {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 8px;
+    }
+
+    .grid-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px 14px;
+    }
+
+    .grid-card-title {
+      font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+      color: #ccc; margin-bottom: 4px; letter-spacing: 0.03em;
+    }
+
+    .grid-card-val {
+      font-family: 'Cinzel', serif; font-size: 20px; font-weight: 600;
+      color: var(--gold);
+    }
+
+    .grid-card-sub { font-size: 11px; color: #555; margin-top: 2px; }
+
+    /* ── MÉTIERS ─────────────────────────────────────────────────────────── */
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px;
+    }
+
+    .craft-card {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 4px; padding: 10px 14px;
+    }
+
+    .craft-title {
+      font-family: 'Cinzel', serif; font-size: 12px; font-weight: 600;
+      color: var(--gold); margin-bottom: 6px; letter-spacing: 0.04em;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px; border-radius: 10px;
+      font-size: 11px; font-family: 'Cinzel', serif; font-weight: 600;
+      margin: 2px; letter-spacing: 0.02em;
+    }
+
+    .harvest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 8px;
+    }
+
+    .harvest-card {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 4px; padding: 12px 16px;
+    }
+
+    .harvest-name {
+      font-family: 'Cinzel', serif; font-size: 11px; font-weight: 600;
+      color: #80D860; margin-bottom: 4px; letter-spacing: 0.04em;
+    }
+
+    .harvest-val {
+      font-family: 'Cinzel', serif; font-size: 24px; font-weight: 700;
+      color: var(--parchment);
+    }
+
+    .harvest-sub { font-size: 11px; color: #555; margin-top: 2px; }
+
+    /* ── ROSTER SEARCH ───────────────────────────────────────────────────── */
+    .search-bar {
+      width: 100%;
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 4px; padding: 8px 14px;
+      color: var(--parchment);
+      font-family: 'Crimson Text', serif; font-size: 15px;
+      margin-bottom: 10px; outline: none;
+    }
+
+    .search-bar:focus { border-color: var(--gold); }
+
+    .filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+
+    .filter-btn {
+      font-family: 'Cinzel', serif; font-size: 9px; font-weight: 600;
+      letter-spacing: 0.04em; padding: 4px 10px;
+      border-radius: 2px; border: 1px solid var(--border);
+      background: transparent; color: #777; cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--gold); color: var(--gold);
+      background: rgba(200,168,75,0.08);
+    }
+
+    /* ── LEVEL DIST ──────────────────────────────────────────────────────── */
+    .level-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
+    }
+
+    .level-card {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 4px; padding: 10px; text-align: center;
+    }
+
+    .level-num {
+      font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700;
+      color: var(--gold);
+    }
+
+    .level-count { font-size: 12px; color: #666; margin-top: 2px; }
+
+    /* ── LOADING / ERROR ─────────────────────────────────────────────────── */
+    .loading-screen {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 60vh; gap: 1.5rem;
+      color: #666;
+    }
+
+    .loading-icon {
+      font-size: 48px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      font-family: 'Cinzel', serif; font-size: 14px;
+      color: var(--gold); letter-spacing: 0.06em;
+    }
+
+    .error-screen {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 60vh; gap: 1rem; text-align: center;
+    }
+
+    .error-title {
+      font-family: 'Cinzel', serif; font-size: 18px;
+      color: #CC4444; margin-bottom: 0.5rem;
+    }
+
+    .error-msg { font-size: 13px; color: #777; max-width: 500px; line-height: 1.6; }
+    .error-url { font-size: 11px; color: #555; margin-top: 0.5rem; font-family: monospace; }
+
+    /* ── LAST UPDATE ─────────────────────────────────────────────────────── */
+    .last-update {
+      font-size: 11px; color: #555;
+      font-family: 'Cinzel', serif;
+      text-align: right; margin-top: 2rem;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="header-left">
+      <div class="logo">⚔</div>
+      <div>
+        <div class="title">Roster de la Guilde</div>
+        <div class="subtitle">World of Warcraft · Dashboard</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="refresh-info">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="status-text">Chargement...</span>
+      </div>
+      <div class="refresh-info">Prochain refresh : <span id="next-refresh">—</span></div>
+      <button class="btn" onclick="loadData(true)">↺ Actualiser</button>
+    </div>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="overview">Vue d'ensemble</button>
+    <button class="tab" data-tab="classes">Classes</button>
+    <button class="tab" data-tab="races">Races</button>
+    <button class="tab" data-tab="roster">Roster</button>
+    <button class="tab" data-tab="metiers">Métiers</button>
+  </div>
+</div>
+
+<div class="content" id="main-content">
+  <div class="loading-screen" id="loading-screen">
+    <div class="loading-icon">⚙</div>
+    <div class="loading-text">Connexion à l'Explorateur de personnages...</div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONFIG — Modifier selon ton setup
+   ══════════════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  // URL GitHub raw de ton CSV
+  githubUrl: 'https://raw.githubusercontent.com/halekss/data_classification_API_blizzard/main/data/mon_dataset_wow.csv',
+
+  // Chemin local (utilisé si le fichier est servi en local via python -m http.server)
+  localUrl: './data/mon_dataset_wow.csv',
+
+  // Intervalle de rafraîchissement automatique en minutes (0 = désactivé)
+  refreshIntervalMinutes: 60,
+
+  // Priorité : 'github' ou 'local'
+  // En local (python -m http.server), les deux fonctionnent.
+  // Sur GitHub Pages, seul 'github' fonctionne.
+  mode: 'github'
+};
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DONNÉES ET ÉTAT
+   ══════════════════════════════════════════════════════════════════════════ */
+const CLASS_COLORS = {
+  'Guerrier': '#C79C6E', 'Paladin': '#F58CBA', 'Chasseur': '#ABD473',
+  'Voleur': '#FFF569', 'Prêtre': '#FFFFFF', 'Chevalier de la mort': '#C41F3B',
+  'Chaman': '#0070DE', 'Mage': '#69CCF0', 'Démoniste': '#9482C9',
+  'Moine': '#00FF96', 'Druide': '#FF7D0A', 'Chasseur de démons': '#A330C9',
+  'Évocateur': '#33937F'
+};
+
+const CRAFT = ['Couture','Forge','Travail du cuir','Joaillerie','Ingénierie','Calligraphie','Enchantement','Alchimie'];
+const HARVEST = ['Herboristerie','Minage','Dépeçage'];
+
+let DATA = [];
+let refreshTimer = null;
+let countdownTimer = null;
+let nextRefreshAt = null;
+let activeTab = 'overview';
+let rosterSearch = '';
+let rosterClassFilter = '';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PARSING CSV
+   ══════════════════════════════════════════════════════════════════════════ */
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim());
+  return lines.slice(1).map(line => {
+    const vals = line.split(',').map(v => v.trim());
+    const obj = {};
+    headers.forEach((h, i) => obj[h] = vals[i] || '');
+    obj.Niveau = parseInt(obj.Niveau) || 0;
+    obj.iLvl = parseInt(obj.iLvl) || 0;
+    return obj;
+  }).filter(r => r.Nom);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CHARGEMENT
+   ══════════════════════════════════════════════════════════════════════════ */
+function setStatus(state, text) {
+  const dot = document.getElementById('status-dot');
+  const txt = document.getElementById('status-text');
+  dot.className = 'status-dot ' + state;
+  txt.textContent = text;
+}
+
+async function loadData(manual = false) {
+  if (manual) setStatus('loading', 'Actualisation...');
+
+  const url = CONFIG.mode === 'local' ? CONFIG.localUrl : CONFIG.githubUrl;
+  const cacheBust = `?t=${Date.now()}`;
+
+  try {
+    const res = await fetch(url + cacheBust);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    DATA = parseCSV(text);
+
+    if (DATA.length === 0) throw new Error('CSV vide ou mal formaté');
+
+    setStatus('ok', `${DATA.length} personnages chargés`);
+    renderAll();
+    scheduleRefresh();
+  } catch (err) {
+    setStatus('error', 'Erreur de chargement');
+    if (DATA.length === 0) showError(url, err.message);
+  }
+}
+
+function showError(url, msg) {
+  document.getElementById('main-content').innerHTML = `
+    <div class="error-screen">
+      <div class="error-title">Impossible de charger le CSV</div>
+      <div class="error-msg">
+        Vérifie que le fichier existe à l'URL ci-dessous, que le dépôt est public,
+        et que le script GitHub Actions a bien tourné au moins une fois.
+        <br><br>En local, lance <code>python -m http.server</code> depuis le dossier du projet
+        et place le CSV dans <code>data/mon_dataset_wow.csv</code>.
+      </div>
+      <div class="error-url">${url}</div>
+      <div class="error-url" style="color:#CC4444;">${msg}</div>
+      <button class="btn" style="margin-top:1rem;" onclick="loadData(true)">↺ Réessayer</button>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   REFRESH AUTO
+   ══════════════════════════════════════════════════════════════════════════ */
+function scheduleRefresh() {
+  if (refreshTimer) clearTimeout(refreshTimer);
+  if (countdownTimer) clearInterval(countdownTimer);
+
+  if (CONFIG.refreshIntervalMinutes <= 0) {
+    document.getElementById('next-refresh').textContent = 'désactivé';
+    return;
+  }
+
+  const ms = CONFIG.refreshIntervalMinutes * 60 * 1000;
+  nextRefreshAt = Date.now() + ms;
+  refreshTimer = setTimeout(() => loadData(), ms);
+
+  countdownTimer = setInterval(() => {
+    const remaining = Math.max(0, nextRefreshAt - Date.now());
+    const m = Math.floor(remaining / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
+    document.getElementById('next-refresh').textContent =
+      `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }, 1000);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RENDU GLOBAL
+   ══════════════════════════════════════════════════════════════════════════ */
+function renderAll() {
+  const content = document.getElementById('main-content');
+  content.innerHTML = `
+    <div id="tab-overview" class="tab-pane ${activeTab==='overview'?'active':''}"></div>
+    <div id="tab-classes"  class="tab-pane ${activeTab==='classes'?'active':''}"></div>
+    <div id="tab-races"    class="tab-pane ${activeTab==='races'?'active':''}"></div>
+    <div id="tab-roster"   class="tab-pane ${activeTab==='roster'?'active':''}"></div>
+    <div id="tab-metiers"  class="tab-pane ${activeTab==='metiers'?'active':''}"></div>
+    <div class="last-update">Dernière mise à jour : ${new Date().toLocaleString('fr-FR')}</div>
+  `;
+
+  renderOverview();
+  renderClasses();
+  renderRaces();
+  renderRoster();
+  renderMetiers();
+}
+
+/* ── OVERVIEW ────────────────────────────────────────────────────────────── */
+function renderOverview() {
+  const el = document.getElementById('tab-overview');
+  const total = DATA.length;
+  const avgIlvl = (DATA.reduce((s,c) => s+c.iLvl,0)/total).toFixed(0);
+  const lvl90 = DATA.filter(c => c.Niveau===90).length;
+  const classes = new Set(DATA.map(c=>c.Classe)).size;
+  const races = new Set(DATA.map(c=>c.Race)).size;
+  const champion = [...DATA].sort((a,b)=>b.iLvl-a.iLvl)[0];
+  const top5 = [...DATA].sort((a,b)=>b.iLvl-a.iLvl).slice(0,5);
+
+  const levelMap = {};
+  DATA.forEach(c => { levelMap[c.Niveau]=(levelMap[c.Niveau]||0)+1; });
+  const levels = Object.entries(levelMap).sort((a,b)=>b[0]-a[0]);
+
+  const col = CLASS_COLORS[champion.Classe]||'#C8A84B';
+
+  el.innerHTML = `
+    <div class="stats-grid">
+      ${statCard(total,'Personnages','dans le roster')}
+      ${statCard(avgIlvl,'iLvl moyen','tous personnages')}
+      ${statCard(lvl90,'Niveau 90','au niveau max')}
+      ${statCard(classes,'Classes','représentées')}
+      ${statCard(races,'Races','représentées')}
+    </div>
+
+    <div class="section-title">🏆 Champion de la guilde</div>
+    <div class="champion-banner">
+      <div class="champion-avatar" style="background:${col}22;color:${col};">
+        ${champion.Nom.slice(0,2).toUpperCase()}
+      </div>
+      <div>
+        <div class="champion-name" style="color:${col};">${champion.Nom}</div>
+        <div class="champion-meta">${champion.Classe} · ${champion.Race} · Niv.${champion.Niveau}</div>
+        <div class="champion-meta" style="margin-top:3px;color:#666;">
+          ${champion['Métier 1']}${champion['Métier 2']!=='Aucun'?' / '+champion['Métier 2']:''}
+        </div>
+      </div>
+      <div class="champion-ilvl">
+        <div class="ilvl-big">${champion.iLvl}</div>
+        <div class="ilvl-label">iLvl</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-title">⚡ Top 5 par iLvl</div>
+    <div class="char-list">
+      ${top5.map((c,i) => charRow(c, i+1, true)).join('')}
+    </div>
+
+    <hr class="divider">
+    <div class="section-title">📊 Distribution par niveau</div>
+    <div class="level-grid">
+      ${levels.map(([lvl,cnt]) => `
+        <div class="level-card">
+          <div class="level-num">${lvl}</div>
+          <div class="level-count">${cnt} perso${cnt>1?'s':''}</div>
+        </div>`).join('')}
+    </div>
+  `;
+}
+
+function statCard(val, label, sub) {
+  return `<div class="stat-card">
+    <div class="stat-label">${label}</div>
+    <div class="stat-value">${val}</div>
+    <div class="stat-sub">${sub}</div>
+  </div>`;
+}
+
+function charRow(c, rank, highlight) {
+  const col = CLASS_COLORS[c.Classe]||'#C8A84B';
+  return `<div class="char-row ${highlight?'highlight':''}">
+    <div class="char-rank" style="color:${highlight?'#C8A84B':'#555'}">${rank}</div>
+    <div class="char-dot" style="background:${col};"></div>
+    <div class="char-name" style="color:${col};">${c.Nom}</div>
+    <div class="char-meta">${c.Classe} · Niv.${c.Niveau}</div>
+    <div class="char-ilvl">${c.iLvl}</div>
+  </div>`;
+}
+
+/* ── CLASSES ─────────────────────────────────────────────────────────────── */
+function renderClasses() {
+  const el = document.getElementById('tab-classes');
+  const map = {};
+  DATA.forEach(c => {
+    if (!map[c.Classe]) map[c.Classe] = [];
+    map[c.Classe].push(c.iLvl);
+  });
+
+  const avgs = Object.entries(map).map(([cl,ilvls]) => ({
+    cl, avg: ilvls.reduce((s,v)=>s+v,0)/ilvls.length, count: ilvls.length
+  })).sort((a,b)=>b.avg-a.avg);
+
+  const maxAvg = avgs[0].avg;
+  const maxCount = Math.max(...avgs.map(x=>x.count));
+
+  const avgBars = avgs.map((item,i) => {
+    const col = CLASS_COLORS[item.cl]||'#C8A84B';
+    const pct = (item.avg/maxAvg*100).toFixed(1);
+    const isBest = i===0, isWorst = i===avgs.length-1;
+    return `<div class="bar-row">
+      <div class="bar-label">
+        ${item.cl}
+        ${isBest?'<span class="badge-top">TOP</span>':''}
+        ${isWorst?'<span class="badge-bot">BAS</span>':''}
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col};"></div></div>
+      <div class="bar-val">${item.avg.toFixed(0)}</div>
+      <div class="bar-count">${item.count}p</div>
+    </div>`;
+  }).join('');
+
+  const cntBars = [...avgs].sort((a,b)=>b.count-a.count).map(item => {
+    const col = CLASS_COLORS[item.cl]||'#C8A84B';
+    const pct = (item.count/maxCount*100).toFixed(1);
+    return `<div class="bar-row">
+      <div class="bar-label">${item.cl}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col};"></div></div>
+      <div class="bar-val" style="color:#ccc;">${item.count}</div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="section-title">⚔ iLvl moyen par classe</div>
+    <div class="bars">${avgBars}</div>
+    <hr class="divider">
+    <div class="section-title">👥 Effectif par classe</div>
+    <div class="bars">${cntBars}</div>
+  `;
+}
+
+/* ── RACES ───────────────────────────────────────────────────────────────── */
+function renderRaces() {
+  const el = document.getElementById('tab-races');
+  const map = {};
+  DATA.forEach(c => {
+    if (!map[c.Race]) map[c.Race] = [];
+    map[c.Race].push(c.iLvl);
+  });
+
+  const sorted = Object.entries(map).map(([race,ilvls]) => ({
+    race, avg: ilvls.reduce((s,v)=>s+v,0)/ilvls.length, count: ilvls.length
+  })).sort((a,b)=>b.avg-a.avg);
+
+  el.innerHTML = `
+    <div class="section-title">🌍 iLvl moyen par race</div>
+    <div class="grid-auto">
+      ${sorted.map(item => `
+        <div class="grid-card">
+          <div class="grid-card-title">${item.race}</div>
+          <div class="grid-card-val">${item.avg.toFixed(0)}</div>
+          <div class="grid-card-sub">${item.count} personnage${item.count>1?'s':''}</div>
+        </div>`).join('')}
+    </div>
+  `;
+}
+
+/* ── ROSTER ──────────────────────────────────────────────────────────────── */
+function renderRoster() {
+  const el = document.getElementById('tab-roster');
+  const classes = [...new Set(DATA.map(c=>c.Classe))].sort();
+
+  el.innerHTML = `
+    <input class="search-bar" id="roster-search" placeholder="Rechercher un personnage, une classe, une race..." value="${rosterSearch}">
+    <div class="filter-row" id="class-filters">
+      <button class="filter-btn ${rosterClassFilter===''?'active':''}" data-class="">Toutes les classes</button>
+      ${classes.map(cl => `
+        <button class="filter-btn ${rosterClassFilter===cl?'active':''}" data-class="${cl}"
+          style="color:${CLASS_COLORS[cl]||'#777'}; border-color:${rosterClassFilter===cl?(CLASS_COLORS[cl]||'#C8A84B'):''};">
+          ${cl}
+        </button>`).join('')}
+    </div>
+    <div id="roster-list"></div>
+  `;
+
+  document.getElementById('roster-search').addEventListener('input', e => {
+    rosterSearch = e.target.value;
+    updateRosterList();
+  });
+
+  document.getElementById('class-filters').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    rosterClassFilter = btn.dataset.class;
+    renderRoster();
+    updateRosterList();
+  });
+
+  updateRosterList();
+}
+
+function updateRosterList() {
+  const s = rosterSearch.toLowerCase();
+  let list = [...DATA].sort((a,b)=>b.iLvl-a.iLvl);
+  if (s) list = list.filter(c =>
+    c.Nom.toLowerCase().includes(s) ||
+    c.Classe.toLowerCase().includes(s) ||
+    c.Race.toLowerCase().includes(s)
+  );
+  if (rosterClassFilter) list = list.filter(c => c.Classe===rosterClassFilter);
+
+  const el = document.getElementById('roster-list');
+  if (!el) return;
+
+  if (list.length === 0) {
+    el.innerHTML = '<div style="color:#555;font-size:13px;padding:12px;">Aucun personnage trouvé.</div>';
+    return;
+  }
+
+  el.innerHTML = `<div class="char-list">
+    ${list.map((c,i) => {
+      const col = CLASS_COLORS[c.Classe]||'#C8A84B';
+      const hi = i<3 && !s && !rosterClassFilter;
+      return `<div class="char-row ${hi?'highlight':''}">
+        <div class="char-rank" style="color:${hi?'#C8A84B':'#555'}">${i+1}</div>
+        <div class="char-dot" style="background:${col};"></div>
+        <div class="char-name" style="color:${col};">${c.Nom}</div>
+        <div class="char-meta">${c.Classe} · ${c.Race} · Niv.${c.Niveau}</div>
+        <div class="char-ilvl">${c.iLvl}</div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+/* ── MÉTIERS ─────────────────────────────────────────────────────────────── */
+function renderMetiers() {
+  const el = document.getElementById('tab-metiers');
+
+  const craftMap = {};
+  const harvestMap = {};
+
+  DATA.forEach(c => {
+    [c['Métier 1'], c['Métier 2']].forEach(m => {
+      if (!m || m==='Aucun') return;
+      if (CRAFT.includes(m)) {
+        if (!craftMap[m]) craftMap[m] = [];
+        craftMap[m].push(c);
+      }
+      if (HARVEST.includes(m)) {
+        if (!harvestMap[m]) harvestMap[m] = new Set();
+        harvestMap[m].add(c.Nom);
+      }
+    });
+  });
+
+  const craftHtml = Object.entries(craftMap)
+    .sort((a,b)=>b[1].length-a[1].length)
+    .map(([prof, chars]) => {
+      const pills = chars.map(c => {
+        const col = CLASS_COLORS[c.Classe]||'#C8A84B';
+        return `<span class="pill" style="background:${col}22;color:${col};border:1px solid ${col}44;">${c.Nom}</span>`;
+      }).join('');
+      return `<div class="craft-card">
+        <div class="craft-title">${prof} <span style="color:#555;font-size:10px;font-weight:400;">(${chars.length})</span></div>
+        <div>${pills}</div>
+      </div>`;
+    }).join('');
+
+  const harvestHtml = HARVEST.filter(p=>harvestMap[p]).map(prof => {
+    const cnt = harvestMap[prof].size;
+    return `<div class="harvest-card">
+      <div class="harvest-name">${prof}</div>
+      <div class="harvest-val">${cnt}</div>
+      <div class="harvest-sub">personnage${cnt>1?'s':''} pratiquant${cnt>1?'s':''}</div>
+    </div>`;
+  }).join('');
+
+  const noMetier = DATA.filter(c=>c['Métier 1']==='Aucun'&&c['Métier 2']==='Aucun');
+  const noMetierHtml = noMetier.length===0
+    ? '<div style="color:#555;font-size:12px;">Aucun personnage sans métier.</div>'
+    : noMetier.map(c => {
+        const col = CLASS_COLORS[c.Classe]||'#C8A84B';
+        return `<span class="pill" style="background:${col}22;color:${col};border:1px solid ${col}44;margin:2px;">
+          ${c.Nom} <span style="color:#555;font-size:9px;">(${c.Classe})</span>
+        </span>`;
+      }).join('');
+
+  el.innerHTML = `
+    <div class="section-title">🔨 Personnages avec un métier de craft</div>
+    <div class="craft-grid">${craftHtml}</div>
+    <hr class="divider">
+    <div class="section-title">🌿 Métiers de récolte</div>
+    <div class="harvest-grid">${harvestHtml}</div>
+    <hr class="divider">
+    <div class="section-title">📋 Sans métier principal</div>
+    <div>${noMetierHtml}</div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NAVIGATION PAR ONGLETS
+   ══════════════════════════════════════════════════════════════════════════ */
+document.getElementById('tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  activeTab = btn.dataset.tab;
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  const pane = document.getElementById('tab-'+activeTab);
+  if (pane) pane.classList.add('active');
+});
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DÉMARRAGE
+   ══════════════════════════════════════════════════════════════════════════ */
+loadData();
+</script>
+</body>
+</html>
