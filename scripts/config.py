@@ -11,7 +11,7 @@ MES_PERSONNAGES = [
     ('Aryastrasza', 'confrérie-du-thorium'),
     ('Daarken', 'confrérie-du-thorium'),
     ('Durmbaur', 'confrérie-du-thorium'),
-    ('Dzuljin', 'confrérie-du-thorium'),
+    ('Djulzin', 'confrérie-du-thorium'),
     ('Ékorce', 'confrérie-du-thorium'),
     ('Féshine', 'confrérie-du-thorium'),
     ('Giin', 'confrérie-du-thorium'),
