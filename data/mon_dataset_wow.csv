@@ -1,5 +1,5 @@
 Nom,Niveau,Classe,Race,iLvl,Métier 1,Métier 2
-Kayssée,90,Moine,Vulpérin,272,Herboristerie,Couture
+Kayssée,90,Moine,Vulpérin,273,Herboristerie,Couture
 Wombaji,90,Chevalier de la mort,Troll zandalari,272,Minage,Couture
 Êv,90,Paladin,Humain,272,Herboristerie,Minage
 Vrenfel,90,Chasseur de démons,Elfe du Vide,271,Dépeçage,Herboristerie
@@ -15,43 +15,43 @@ Haghéra,90,Chevalier de la mort,Humain,224,Dépeçage,Minage
 Ayshaune,90,Chaman,Haranir,216,Aucun,Aucun
 Chutétoile,90,Démoniste,Draeneï sancteforge,206,Aucun,Aucun
 Narîdia,90,Chaman,Draeneï,169,Aucun,Aucun
+Feuraluyn,83,Druide,Elfe de la nuit,135,Dépeçage,Herboristerie
 Furaya,82,Paladin,Draeneï sancteforge,136,Forge,Minage
-Scindios,81,Chasseur de démons,Elfe de sang,150,Dépeçage,Travail du cuir
 Havväh,81,Moine,Draeneï sancteforge,143,Forge,Minage
-Rengarh,81,Chasseur,Worgen,127,Dépeçage,Travail du cuir
+Scindios,81,Chasseur de démons,Elfe de sang,150,Dépeçage,Travail du cuir
 Phéniraë,81,Mage,Elfe de sang,129,Enchantement,Couture
-Daarken,80,Démoniste,Elfe de sang,140,Enchantement,Couture
+Rengarh,81,Chasseur,Worgen,127,Dépeçage,Travail du cuir
 Nymphaë,80,Chasseur,Elfe de la nuit,140,Aucun,Aucun
 Neekrad,80,Prêtre,Elfe du Vide,141,Aucun,Aucun
 Scarêvansse,80,Chasseur de démons,Elfe de la nuit,138,Dépeçage,Minage
 Annahilahay,80,Paladin,Elfe de sang,140,Aucun,Aucun
-Blaîr,80,Druide,Worgen,133,Dépeçage,Herboristerie
+Daarken,80,Démoniste,Elfe de sang,140,Enchantement,Couture
 Séphine,80,Prêtre,Mort-vivant,132,Aucun,Aucun
 Ævanreth,80,Guerrier,Elfe du Vide,130,Dépeçage,Minage
-Nasharz,80,Mage,Elfe de la nuit,129,Aucun,Aucun
-Ranulia,80,Mage,Humain,131,Enchantement,Couture
 Barloud,80,Voleur,Kultirassien,130,Herboristerie,Couture
-Shiden,80,Paladin,Draeneï,129,Aucun,Aucun
 Névègosa,80,Évocateur,Dracthyr,129,Herboristerie,Minage
-Héphastrasza,80,Guerrier,Dracthyr,128,Aucun,Aucun
+Blaîr,80,Druide,Worgen,133,Dépeçage,Herboristerie
+Shiden,80,Paladin,Draeneï,129,Aucun,Aucun
 Kakumô,80,Chaman,Troll,129,Herboristerie,Minage
+Nasharz,80,Mage,Elfe de la nuit,129,Aucun,Aucun
 Absolya,80,Prêtre,Dracthyr,128,Aucun,Aucun
-Gydera,80,Chasseur,Dracthyr,128,Aucun,Aucun
+Héphastrasza,80,Guerrier,Dracthyr,128,Aucun,Aucun
 Syrra,80,Chasseur,Elfe de sang,128,Aucun,Aucun
+Gydera,80,Chasseur,Dracthyr,128,Aucun,Aucun
+Ranulia,80,Mage,Humain,131,Enchantement,Couture
 Khör,80,Guerrier,Orc,127,Dépeçage,Minage
 Linilym,80,Démoniste,Draeneï,126,Enchantement,Couture
 Rytaa,80,Chaman,Vulpérin,126,Dépeçage,Minage
 Karkua,80,Druide,Troll zandalari,125,Herboristerie,Minage
 Ékorce,80,Druide,Tauren de Haut-Roc,125,Aucun,Aucun
 Féshine,80,Chasseur,Haranir,124,Dépeçage,Couture
-Tryxi,80,Voleur,Gobelin,124,Ingénierie,Minage
 Synestrah,80,Voleur,Elfe du Vide,124,Aucun,Aucun
-Méduzah,80,Voleur,Vulpérin,123,Dépeçage,Couture
+Tryxi,80,Voleur,Gobelin,124,Ingénierie,Minage
 Lylìth,80,Chevalier de la mort,Elfe du Vide,123,Enchantement,Minage
-Tönka,80,Guerrier,Tauren de Haut-Roc,122,Herboristerie,Minage
+Méduzah,80,Voleur,Vulpérin,123,Dépeçage,Couture
 Arcorror,80,Chevalier de la mort,Sacrenuit,122,Aucun,Aucun
+Tönka,80,Guerrier,Tauren de Haut-Roc,122,Herboristerie,Minage
 Akané,80,Moine,Humain,121,Herboristerie,Couture
-Vajunko,80,Paladin,Troll zandalari,118,Aucun,Aucun
 Durmbaur,80,Druide,Tauren,118,Herboristerie,Minage
+Vajunko,80,Paladin,Troll zandalari,118,Aucun,Aucun
 Giin,80,Moine,Pandaren,117,Herboristerie,Couture
-Feuraluyn,80,Druide,Elfe de la nuit,116,Herboristerie,Minage
