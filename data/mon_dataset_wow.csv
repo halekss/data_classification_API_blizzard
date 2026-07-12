@@ -8,7 +8,7 @@ Sharelys,90,Mage,Sacrenuit,270,Herboristerie,Calligraphie
 Aryastrasza,90,Évocateur,Dracthyr,269,Herboristerie,Minage
 Pandréa,90,Démoniste,Dracthyr,269,Enchantement,Couture
 Sélunée,90,Druide,Haranir,258,Herboristerie,Minage
-Purités,90,Prêtre,Draeneï sancteforge,257,Enchantement,Couture
+Purités,90,Prêtre,Draeneï sancteforge,258,Enchantement,Couture
 Élizabeth,90,Voleur,Humain,255,Dépeçage,Couture
 Jakundar,90,Chasseur,Troll zandalari,251,Dépeçage,Couture
 Kakumô,90,Chaman,Troll,234,Minage,Couture
@@ -19,16 +19,16 @@ Syrra,90,Chasseur,Elfe de sang,211,Aucun,Aucun
 Chutétoile,90,Démoniste,Draeneï sancteforge,206,Aucun,Aucun
 Scindios,90,Chasseur de démons,Elfe de sang,199,Dépeçage,Travail du cuir
 Narîdia,90,Chaman,Draeneï,169,Aucun,Aucun
+Ranulia,85,Mage,Humain,146,Herboristerie,Couture
 Furaya,82,Paladin,Draeneï sancteforge,136,Forge,Minage
-Havväh,81,Moine,Draeneï sancteforge,143,Forge,Minage
 Phéniraë,81,Mage,Elfe de sang,129,Enchantement,Couture
+Havväh,81,Moine,Draeneï sancteforge,143,Forge,Minage
 Rengarh,81,Chasseur,Worgen,127,Dépeçage,Travail du cuir
+Neekrad,80,Prêtre,Elfe du Vide,141,Aucun,Aucun
 Annahilahay,80,Paladin,Elfe de sang,140,Aucun,Aucun
 Daarken,80,Démoniste,Elfe de sang,140,Enchantement,Couture
-Neekrad,80,Prêtre,Elfe du Vide,141,Aucun,Aucun
-Scarêvansse,80,Chasseur de démons,Elfe de la nuit,138,Dépeçage,Minage
+Blaîr,80,Druide,Worgen,133,Dépeçage,Herboristerie
 Séphine,80,Prêtre,Mort-vivant,132,Aucun,Aucun
-Ranulia,80,Mage,Humain,131,Enchantement,Couture
 Ævanreth,80,Guerrier,Elfe du Vide,130,Dépeçage,Minage
 Nymphaë,80,Chasseur,Elfe de la nuit,140,Aucun,Aucun
 Barloud,80,Voleur,Kultirassien,130,Herboristerie,Couture
@@ -38,7 +38,7 @@ Nasharz,80,Mage,Elfe de la nuit,129,Aucun,Aucun
 Absolya,80,Prêtre,Dracthyr,128,Aucun,Aucun
 Héphastrasza,80,Guerrier,Dracthyr,128,Aucun,Aucun
 Gydera,80,Chasseur,Dracthyr,128,Aucun,Aucun
-Blaîr,80,Druide,Worgen,133,Dépeçage,Herboristerie
+Scarêvansse,80,Chasseur de démons,Elfe de la nuit,138,Dépeçage,Minage
 Khör,80,Guerrier,Orc,127,Dépeçage,Minage
 Linilym,80,Démoniste,Draeneï,126,Enchantement,Couture
 Rytaa,80,Chaman,Vulpérin,126,Dépeçage,Minage
