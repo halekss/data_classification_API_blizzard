@@ -67,6 +67,8 @@ const CLASS_COLORS = {
   'Évocateur':'#33937F'
 };
 
+const FACTION_COLORS = { 'Horde':'#C41F3B', 'Alliance':'#1E6FD9', 'Inconnue':'#666' };
+
 const CRAFT = ['Couture','Forge','Travail du cuir','Joaillerie','Ingénierie','Calligraphie','Enchantement','Alchimie'];
 const HARVEST = ['Herboristerie','Minage','Dépeçage','Couture'];
 
@@ -92,6 +94,7 @@ function parseCSV(text) {
     headers.forEach((h, i) => obj[h] = vals[i] || '');
     obj.Niveau = parseInt(obj.Niveau) || 0;
     obj.iLvl = parseInt(obj.iLvl) || 0;
+    obj.Faction = obj.Faction || 'Inconnue';
     return obj;
   }).filter(r => r.Nom);
 }
@@ -280,6 +283,43 @@ function renderClasses() {
     </div>`;
   }).join('');
 
+  /* Effectif par faction */
+  const factionMap = {};
+  DATA.forEach(c => { factionMap[c.Faction]=(factionMap[c.Faction]||0)+1; });
+  const factionOrder = ['Horde','Alliance'].filter(f=>factionMap[f]).concat(Object.keys(factionMap).filter(f=>f!=='Horde'&&f!=='Alliance'));
+  const factionCards = factionOrder.map(f => {
+    const col = FACTION_COLORS[f]||'#888';
+    return `<div class="stat-card" style="border-color:${col}55;">
+      <div class="stat-label" style="color:${col};">${f}</div>
+      <div class="stat-value">${factionMap[f]}</div>
+      <div class="stat-sub">${(factionMap[f]/DATA.length*100).toFixed(0)}% du roster</div>
+    </div>`;
+  }).join('');
+
+  /* Classes par faction (barre empilée Horde/Alliance) */
+  const classFactionMap = {};
+  DATA.forEach(c => {
+    if (!classFactionMap[c.Classe]) classFactionMap[c.Classe] = {};
+    classFactionMap[c.Classe][c.Faction] = (classFactionMap[c.Classe][c.Faction]||0) + 1;
+  });
+  const classFactionTotals = Object.entries(classFactionMap).map(([cl,fm]) => ({
+    cl, fm, total: Object.values(fm).reduce((s,v)=>s+v,0)
+  })).sort((a,b)=>b.total-a.total);
+  const maxClassFactionTotal = Math.max(...classFactionTotals.map(x=>x.total));
+  const classFactionBars = classFactionTotals.map(({cl,fm,total}) => {
+    const trackPct = (total/maxClassFactionTotal*100).toFixed(1);
+    const segments = Object.entries(fm).map(([f,cnt]) => {
+      const col = FACTION_COLORS[f]||'#888';
+      const segPct = (cnt/total*100).toFixed(1);
+      return `<div style="width:${segPct}%;height:100%;background:${col};" title="${f} : ${cnt}"></div>`;
+    }).join('');
+    return `<div class="bar-row">
+      <div class="bar-label">${cl}</div>
+      <div class="bar-track"><div style="display:flex;width:${trackPct}%;height:100%;">${segments}</div></div>
+      <div class="bar-count">${total}p</div>
+    </div>`;
+  }).join('');
+
   el.innerHTML = `
     <div class="section-title">⚔ iLvl moyen par classe</div>
     <div class="bars">${avgBars}</div>
@@ -289,6 +329,15 @@ function renderClasses() {
     <hr class="divider">
     <div class="section-title">🌍 Effectif par race</div>
     <div class="bars">${raceBars}</div>
+    <hr class="divider">
+    <div class="section-title">🛡 Effectif par faction</div>
+    <div class="stats-grid">${factionCards}</div>
+    <hr class="divider">
+    <div class="section-title">🎭 Classes par faction</div>
+    <div class="bars">${classFactionBars}</div>
+    <div class="faction-legend">
+      ${factionOrder.map(f=>`<span class="legend-item"><span class="legend-dot" style="background:${FACTION_COLORS[f]||'#888'};"></span>${f}</span>`).join('')}
+    </div>
   `;
 }
 

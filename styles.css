@@ -603,6 +603,28 @@ body {
   border: 1px solid #CC3333;
 }
 
+/* ── LÉGENDE FACTION ─────────────────────────────────────────────────── */
+.faction-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #999;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 /* ── MÉTIERS : craft, récolte, étiquettes ──────────────────────────── */
 .craft-grid {
   display: grid;

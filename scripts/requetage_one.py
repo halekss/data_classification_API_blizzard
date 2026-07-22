@@ -46,7 +46,7 @@ if token:
     
     with open(nom_fichier, mode='w', newline='', encoding='utf-8') as fichier:
         writer = csv.writer(fichier)
-        writer.writerow(['Nom', 'Niveau', 'Classe', 'Race', 'iLvl', 'Métier 1', 'Métier 2'])
+        writer.writerow(['Nom', 'Niveau', 'Classe', 'Race', 'Faction', 'iLvl', 'Métier 1', 'Métier 2'])
 
         for nom_p, royaume_p in MES_PERSONNAGES:
             nom_nettoye = nom_p.lower()
@@ -61,6 +61,7 @@ if token:
                 niveau = data_p.get('level', "N/A")
                 classe = extraire_texte(data_p.get('character_class', {}).get('name', "Inconnue"))
                 race = extraire_texte(data_p.get('race', {}).get('name', "Inconnue"))
+                faction = extraire_texte(data_p.get('faction', {}).get('name', "Inconnue"))
                 ilvl = data_p.get('equipped_item_level', "N/A")
 
                 m_liste = []
@@ -72,7 +73,7 @@ if token:
                 m1 = m_liste[0] if len(m_liste) > 0 else "Aucun"
                 m2 = m_liste[1] if len(m_liste) > 1 else "Aucun"
 
-                writer.writerow([nom, niveau, classe, race, ilvl, m1, m2])
+                writer.writerow([nom, niveau, classe, race, faction, ilvl, m1, m2])
                 print(f"✅ {nom} ({royaume_p}) ajouté.")
             else:
                 print(f"❌ Erreur : {nom_p} sur {royaume_p} est introuvable.")
