@@ -296,7 +296,7 @@ function renderClasses() {
     </div>`;
   }).join('');
 
-  /* Classes par faction (barre empilée Horde/Alliance) */
+  /* Classes par faction (pyramide Alliance ↔ Horde) */
   const classFactionMap = {};
   DATA.forEach(c => {
     if (!classFactionMap[c.Classe]) classFactionMap[c.Classe] = {};
@@ -305,18 +305,19 @@ function renderClasses() {
   const classFactionTotals = Object.entries(classFactionMap).map(([cl,fm]) => ({
     cl, fm, total: Object.values(fm).reduce((s,v)=>s+v,0)
   })).sort((a,b)=>b.total-a.total);
-  const maxClassFactionTotal = Math.max(...classFactionTotals.map(x=>x.total));
-  const classFactionBars = classFactionTotals.map(({cl,fm,total}) => {
-    const trackPct = (total/maxClassFactionTotal*100).toFixed(1);
-    const segments = Object.entries(fm).map(([f,cnt]) => {
-      const col = FACTION_COLORS[f]||'#888';
-      const segPct = (cnt/total*100).toFixed(1);
-      return `<div style="width:${segPct}%;height:100%;background:${col};" title="${f} : ${cnt}"></div>`;
-    }).join('');
-    return `<div class="bar-row">
-      <div class="bar-label">${cl}</div>
-      <div class="bar-track"><div style="display:flex;width:${trackPct}%;height:100%;">${segments}</div></div>
-      <div class="bar-count">${total}p</div>
+  const hasFactionData = !!(factionMap.Horde || factionMap.Alliance);
+  const maxSingleCount = Math.max(1, ...classFactionTotals.flatMap(({fm}) => [fm.Alliance||0, fm.Horde||0]));
+  const classFactionBars = classFactionTotals.map(({cl,fm}) => {
+    const allianceCount = fm.Alliance||0;
+    const hordeCount = fm.Horde||0;
+    const alliancePct = (allianceCount/maxSingleCount*100).toFixed(1);
+    const hordePct = (hordeCount/maxSingleCount*100).toFixed(1);
+    return `<div class="faction-pyramid-row">
+      <div class="pyramid-count pyramid-count-alliance">${allianceCount}</div>
+      <div class="pyramid-track pyramid-track-alliance"><div class="pyramid-bar" style="width:${alliancePct}%;background:${FACTION_COLORS.Alliance};"></div></div>
+      <div class="pyramid-label">${cl}</div>
+      <div class="pyramid-track pyramid-track-horde"><div class="pyramid-bar" style="width:${hordePct}%;background:${FACTION_COLORS.Horde};"></div></div>
+      <div class="pyramid-count pyramid-count-horde">${hordeCount}</div>
     </div>`;
   }).join('');
 
@@ -334,10 +335,13 @@ function renderClasses() {
     <div class="stats-grid">${factionCards}</div>
     <hr class="divider">
     <div class="section-title">🎭 Classes par faction</div>
-    <div class="bars">${classFactionBars}</div>
-    <div class="faction-legend">
-      ${factionOrder.map(f=>`<span class="legend-item"><span class="legend-dot" style="background:${FACTION_COLORS[f]||'#888'};"></span>${f}</span>`).join('')}
+    ${hasFactionData ? `
+    <div class="faction-legend faction-legend-top">
+      <span class="legend-item"><span class="legend-dot" style="background:${FACTION_COLORS.Alliance};"></span>Alliance</span>
+      <span class="legend-item"><span class="legend-dot" style="background:${FACTION_COLORS.Horde};"></span>Horde</span>
     </div>
+    <div class="faction-pyramid">${classFactionBars}</div>
+    ` : `<div class="empty-hint">Données de faction indisponibles pour le moment (colonne absente du CSV — relance le pipeline de collecte).</div>`}
   `;
 }
 

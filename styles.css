@@ -608,6 +608,12 @@ body {
   display: flex;
   gap: 18px;
   margin-top: 10px;
+  justify-content: center;
+}
+
+.faction-legend-top {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .legend-item {
@@ -623,6 +629,65 @@ body {
   height: 10px;
   border-radius: 50%;
   display: inline-block;
+}
+
+/* ── PYRAMIDE CLASSES PAR FACTION ────────────────────────────────────── */
+.faction-pyramid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faction-pyramid-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pyramid-count {
+  min-width: 26px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.pyramid-count-alliance { text-align: left; }
+.pyramid-count-horde { text-align: right; }
+
+.pyramid-track {
+  flex: 1;
+  height: 14px;
+  background: rgba(10, 8, 18, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+  display: flex;
+}
+
+.pyramid-track-alliance { justify-content: flex-end; }
+.pyramid-track-horde { justify-content: flex-start; }
+
+.pyramid-bar {
+  height: 100%;
+}
+
+.pyramid-label {
+  min-width: 150px;
+  max-width: 150px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: #bbb;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty-hint {
+  font-size: 13px;
+  color: #666;
+  padding: 12px;
+  text-align: center;
 }
 
 /* ── MÉTIERS : craft, récolte, étiquettes ──────────────────────────── */
@@ -883,6 +948,8 @@ body {
   body { font-size: 16px; }
   .champion-banner { flex-wrap: wrap; }
   .bar-label { min-width: 110px; max-width: 110px; font-size: 12px; }
+  .pyramid-label { min-width: 90px; max-width: 90px; font-size: 11px; }
+  .pyramid-count { min-width: 20px; font-size: 12px; }
   .char-name { font-size: 14px; }
   .char-meta { font-size: 12px; }
   .char-ilvl { font-size: 15px; }
