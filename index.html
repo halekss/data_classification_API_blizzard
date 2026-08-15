@@ -286,7 +286,7 @@ function renderClasses() {
   /* Effectif par faction */
   const factionMap = {};
   DATA.forEach(c => { factionMap[c.Faction]=(factionMap[c.Faction]||0)+1; });
-  const factionOrder = ['Horde','Alliance'].filter(f=>factionMap[f]).concat(Object.keys(factionMap).filter(f=>f!=='Horde'&&f!=='Alliance'));
+  const factionOrder = ['Alliance','Horde'].filter(f=>factionMap[f]).concat(Object.keys(factionMap).filter(f=>f!=='Alliance'&&f!=='Horde'));
   const factionCards = factionOrder.map(f => {
     const col = FACTION_COLORS[f]||'#888';
     return `<div class="stat-card" style="border-color:${col}55;">
