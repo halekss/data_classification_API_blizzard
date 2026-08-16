@@ -15,7 +15,7 @@ function serveDataDir(): Plugin {
       server.middlewares.use('/data', (req, res, next) => {
         const url = (req.url || '').split('?')[0];
         const filePath = path.join(dataDir, decodeURIComponent(url));
-        if (!filePath.startsWith(dataDir)) {
+        if (filePath !== dataDir && !filePath.startsWith(dataDir + path.sep)) {
           next();
           return;
         }
