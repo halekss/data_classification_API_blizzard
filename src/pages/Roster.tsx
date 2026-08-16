@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRoster } from '@/context/RosterContext';
 import { CLASS_COLORS } from '@/lib/wow-constants';
 
@@ -56,13 +57,18 @@ export function RosterPage() {
       {list.length === 0 ? (
         <div className="text-parchment/50 text-sm p-3">Aucun résultat.</div>
       ) : (
-        <div>
+        <AnimatePresence initial={false}>
           {list.map((c, i) => {
             const col = CLASS_COLORS[c.Classe] || '#C8A84B';
             const hi = i < 3 && !s && !classFilter;
             return (
-              <div
+              <motion.div
                 key={c.Nom}
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
                 className={`flex items-center gap-3 py-2 border-b border-border/50 ${hi ? 'bg-gold/5' : ''}`}
               >
                 <div className="w-6 text-right" style={{ color: hi ? '#C8A84B' : '#555' }}>
@@ -76,10 +82,10 @@ export function RosterPage() {
                   {c.Classe} · {c.Race} · Niv.{c.Niveau}
                 </div>
                 <div className="font-display text-gold">{c.iLvl}</div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </AnimatePresence>
       )}
     </div>
   );
