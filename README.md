@@ -23,14 +23,15 @@ La source de données est l'API Battle.net de Blizzard. Les entités collectées
 
 **Automatisation** — Un workflow GitHub Actions déclenche le pipeline tous les jours à 23h47. Le CSV résultant est committé directement sur le dépôt via le token Actions.
 
-**Visualisation** — Le dashboard HTML lit le CSV depuis l'URL raw GitHub via `fetch()`. Il recalcule à la volée les agrégats : moyennes par groupe, classements, distributions. Pas de backend, pas de base de données.
+**Visualisation** — Le dashboard React lit le CSV et les fichiers JSON de référence (métiers, builds) depuis l'URL raw GitHub via `fetch()`, jamais depuis le build — la mise à jour quotidienne du CSV n'exige donc aucun redéploiement. Il recalcule à la volée les agrégats : moyennes par groupe, classements, distributions. Pas de backend, pas de base de données.
 
 ## Structure du projet
 
 ```
 ├── .github/
 │   └── workflows/
-│       └── main.yml          # Pipeline CI/CD — collecte et commit quotidiens
+│       ├── main.yml           # Pipeline CI/CD — collecte et commit quotidiens
+│       └── deploy.yml         # Build + déploiement du dashboard sur GitHub Pages
 ├── dags/
 │   └── wow_export_dag.py     # DAG Airflow (orchestration locale alternative)
 ├── src/                       # Dashboard React (pages, composants, hooks, contexte roster)
@@ -43,7 +44,7 @@ La source de données est l'API Battle.net de Blizzard. Les entités collectées
 │   ├── config.py             # Paramètres, credentials via variables d'environnement
 │   └── requetage_one.py      # Script de collecte et traitement
 ├── docker-compose.yaml       # Stack Airflow locale
-├── index.html                 # Entrée Vite
+└── index.html                 # Entrée Vite
 ```
 
 ## Orchestration
@@ -55,6 +56,16 @@ Le workflow `.github/workflows/main.yml` installe les dépendances, exécute le 
 Les credentials API sont gérés via les secrets GitHub (`ID_CLIENT`, `SECRET_CLIENT`) et injectés comme variables d'environnement au moment de l'exécution. Aucune clé n'est écrite dans le code.
 
 Déclenchement manuel : onglet Actions → "WoW Character List" → "Run workflow".
+
+### Déploiement du dashboard
+
+Le workflow `.github/workflows/deploy.yml` build le dashboard React (`npm ci && npm run build`) et le publie sur GitHub Pages via `actions/deploy-pages`, à chaque push sur `main`. Un `404.html` (copie de `index.html`) est ajouté au build pour que les routes React Router (`/roster`, `/metiers`, etc.) fonctionnent aussi en accès direct/rafraîchissement sur l'hébergement statique de GitHub Pages.
+
+Ce workflow est indépendant de `main.yml` : le commit quotidien du CSV porte `[skip ci]` et ne redéclenche donc pas de build — cohérent avec le fait que le dashboard lit le CSV/JSON à l'exécution, jamais depuis le build.
+
+Prérequis (déjà configuré) : Settings → Pages → Source → **GitHub Actions** (au lieu de "Deploy from a branch").
+
+Déclenchement manuel : onglet Actions → "Deploy Dashboard" → "Run workflow".
 
 ### Apache Airflow via Docker (option développée)
 
