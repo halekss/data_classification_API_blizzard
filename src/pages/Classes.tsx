@@ -150,14 +150,14 @@ export function ClassesPage() {
             return (
               <div
                 key={f}
-                className="border rounded p-4 bg-panel"
+                className="border rounded p-4 bg-panel flex flex-col items-center text-center"
                 style={{ borderColor: `${col}55` }}
               >
-                <div className="text-xs" style={{ color: col }}>
+                <div className="text-sm" style={{ color: col }}>
                   {f}
                 </div>
-                <div className="text-2xl font-display">{cnt}</div>
-                <div className="text-xs text-parchment/60">
+                <div className="text-3xl font-display">{cnt}</div>
+                <div className="text-sm text-parchment/60">
                   {((cnt / filtered.length) * 100).toFixed(0)}% du roster
                 </div>
               </div>
@@ -173,21 +173,21 @@ export function ClassesPage() {
             Données de faction indisponibles pour le moment.
           </div>
         ) : (
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             {classFactionTotals.map(({ cl, fm }) => {
               const a = fm.get('Alliance') || 0;
               const h = fm.get('Horde') || 0;
               return (
-                <div key={cl} className="flex items-center gap-2 text-sm">
+                <div key={cl} className="flex items-center gap-3 text-sm">
                   <div className="w-8 text-right text-parchment/70">{a}</div>
-                  <div className="w-32 h-2.5 bg-border/30 rounded overflow-hidden flex justify-end">
+                  <div className="flex-1 h-3 bg-border/30 rounded overflow-hidden flex justify-end">
                     <div
                       className="h-full rounded"
                       style={{ width: `${(a / maxSingle) * 100}%`, background: FACTION_COLORS.Alliance }}
                     />
                   </div>
-                  <div className="w-32 text-center">{cl}</div>
-                  <div className="w-32 h-2.5 bg-border/30 rounded overflow-hidden">
+                  <div className="w-40 text-center font-display">{cl}</div>
+                  <div className="flex-1 h-3 bg-border/30 rounded overflow-hidden">
                     <div
                       className="h-full rounded"
                       style={{ width: `${(h / maxSingle) * 100}%`, background: FACTION_COLORS.Horde }}

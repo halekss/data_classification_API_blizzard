@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
 import { RosterProvider } from '@/context/RosterContext';
 import { Layout } from '@/layout/Layout';
 import { PageTransition } from '@/layout/PageTransition';
@@ -12,15 +11,13 @@ import { BuildsPage } from '@/pages/Builds';
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><OverviewPage /></PageTransition>} />
-        <Route path="/classes" element={<PageTransition><ClassesPage /></PageTransition>} />
-        <Route path="/roster" element={<PageTransition><RosterPage /></PageTransition>} />
-        <Route path="/metiers" element={<PageTransition><MetiersPage /></PageTransition>} />
-        <Route path="/builds" element={<PageTransition><BuildsPage /></PageTransition>} />
-      </Routes>
-    </AnimatePresence>
+    <Routes location={location} key={location.pathname}>
+      <Route path="/" element={<PageTransition><OverviewPage /></PageTransition>} />
+      <Route path="/classes" element={<PageTransition><ClassesPage /></PageTransition>} />
+      <Route path="/roster" element={<PageTransition><RosterPage /></PageTransition>} />
+      <Route path="/metiers" element={<PageTransition><MetiersPage /></PageTransition>} />
+      <Route path="/builds" element={<PageTransition><BuildsPage /></PageTransition>} />
+    </Routes>
   );
 }
 

@@ -23,7 +23,7 @@ export function BarRow({
         />
       </div>
       <div className="w-10 text-right text-gold">{value}</div>
-      {count && <div className="w-10 text-right text-parchment/50 text-xs">{count}</div>}
+      {count && <div className="w-10 text-right text-parchment/50 text-sm">{count}</div>}
     </motion.div>
   );
 }

@@ -38,7 +38,7 @@ La source de données est l'API Battle.net de Blizzard. Les entités collectées
 ├── data/
 │   ├── mon_dataset_wow.csv    # Dataset généré automatiquement
 │   ├── metiers_reference.json # Équipements métiers + bonus raciaux (référence statique)
-│   ├── metiers_assignations.json # Rôles crafteur/cueilleur par personnage
+│   ├── metiers_assignations.json # Crafteurs désignés + pickeurs inactifs (hors saison)
 │   └── builds_wowhead.json    # Liens Wowhead par classe + spécialisation
 ├── scripts/
 │   ├── config.py             # Paramètres, credentials via variables d'environnement

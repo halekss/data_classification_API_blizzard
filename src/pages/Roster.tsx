@@ -32,9 +32,9 @@ export function RosterPage() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="grid grid-cols-7 justify-items-start gap-1.5 mb-4">
         <button
-          className={`px-3 py-1 rounded border text-sm ${
+          className={`px-2 py-1 rounded border text-sm whitespace-nowrap ${
             classFilter === '' ? 'bg-gold text-dark border-gold' : 'border-border text-parchment/70'
           }`}
           onClick={() => setClassFilter('')}
@@ -44,7 +44,7 @@ export function RosterPage() {
         {classes.map((cl) => (
           <button
             key={cl}
-            className={`px-3 py-1 rounded border text-sm ${
+            className={`px-2 py-1 rounded border text-sm whitespace-nowrap ${
               classFilter === cl ? 'bg-gold text-dark border-gold' : 'border-border'
             }`}
             style={{ color: classFilter === cl ? undefined : CLASS_COLORS[cl] || '#888' }}

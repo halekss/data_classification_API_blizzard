@@ -1,3 +1,4 @@
 {
-  "Daarken": ["Enchantement"]
+  "crafteurs": { "Daarken": ["Enchantement"] },
+  "pickeursInactifs": []
 }

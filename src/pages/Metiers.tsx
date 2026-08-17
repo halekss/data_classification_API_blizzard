@@ -1,7 +1,12 @@
 import { useRoster } from '@/context/RosterContext';
 import { useMetiersReference } from '@/hooks/useMetiersReference';
 import { useMetiersAssignations } from '@/hooks/useMetiersAssignations';
-import { personnesSansMetier, derivePersonnesMetiers, deriveCompteurs } from '@/lib/metiersDerivation';
+import {
+  personnesSansMetier,
+  derivePersonnesMetiers,
+  groupPickeursByPersonnage,
+  deriveCompteurs,
+} from '@/lib/metiersDerivation';
 import { exportAssignations } from '@/lib/exportAssignations';
 import { CLASS_COLORS } from '@/lib/wow-constants';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
@@ -9,7 +14,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@
 export function MetiersPage() {
   const { data, status: rosterStatus } = useRoster();
   const { reference, status: refStatus } = useMetiersReference();
-  const { assignations, status: assignStatus, toggleRole } = useMetiersAssignations();
+  const { assignations, status: assignStatus, toggleRole, toggleActif } = useMetiersAssignations();
 
   if (rosterStatus === 'loading' || refStatus === 'loading' || assignStatus === 'loading')
     return <div>Chargement...</div>;
@@ -19,7 +24,7 @@ export function MetiersPage() {
   const sansMetier = personnesSansMetier(data);
   const personnesMetiers = derivePersonnesMetiers(data, assignations);
   const crafteurs = personnesMetiers.filter((pm) => pm.role === 'crafteur');
-  const cueilleurs = personnesMetiers.filter((pm) => pm.role === 'cueilleur');
+  const pickeurs = groupPickeursByPersonnage(personnesMetiers);
   const compteurs = deriveCompteurs(personnesMetiers);
 
   return (
@@ -57,6 +62,7 @@ export function MetiersPage() {
 
       <section>
         <h2 className="font-display text-gold mb-2">⭐ Crafteurs</h2>
+        <p className="text-sm text-parchment/50 mb-2">Métier de craft fixe — toujours comptés, pas de saisonnalité.</p>
         <div className="space-y-2">
           {crafteurs.map((pm) => {
             const eq = reference.equipements[pm.metier];
@@ -76,7 +82,7 @@ export function MetiersPage() {
                 </button>
                 <div className="text-sm">{pm.metier}</div>
                 {eq && (
-                  <div className="text-xs text-parchment/50">
+                  <div className="text-sm text-parchment/50">
                     {eq.outil} · {eq.accessoire1} · {eq.accessoire2}
                   </div>
                 )}
@@ -89,52 +95,63 @@ export function MetiersPage() {
 
       <section>
         <h2 className="font-display text-gold mb-2">🌿 Pickeurs</h2>
+        <p className="text-sm text-parchment/50 mb-2">
+          Décoche un personnage que tu ne joues plus cette saison pour le retirer du compteur de cueilleurs actifs.
+        </p>
         <div className="space-y-2">
-          {cueilleurs.map((pm) => {
-            const eq = reference.equipements[pm.metier];
-            const col = CLASS_COLORS[pm.personnage.Classe] || '#C8A84B';
+          {pickeurs.map((pg) => {
+            const col = CLASS_COLORS[pg.personnage.Classe] || '#C8A84B';
             return (
               <div
-                key={`${pm.personnage.Nom}-${pm.metier}`}
-                className="flex flex-wrap items-center gap-3 border border-border rounded p-2"
+                key={pg.personnage.Nom}
+                className={`flex flex-wrap items-center gap-3 border rounded p-2 ${
+                  pg.actif ? 'border-border' : 'border-border/30 opacity-50'
+                }`}
               >
-                <button
-                  className="font-display px-2 py-1 rounded"
-                  style={{ color: col, background: `${col}18` }}
-                  onClick={() => toggleRole(pm.personnage.Nom, pm.metier)}
-                  title="Cliquer pour désigner comme crafteur"
-                >
-                  {pm.personnage.Nom}
-                </button>
-                <div className="text-sm">{pm.metier}</div>
-                {eq && (
-                  <div className="text-xs text-parchment/50">
-                    {eq.outil} · {eq.accessoire1} · {eq.accessoire2}
-                  </div>
-                )}
+                <label className="flex items-center gap-2 cursor-pointer" title="Actif cette saison">
+                  <input
+                    type="checkbox"
+                    checked={pg.actif}
+                    onChange={() => toggleActif(pg.personnage.Nom)}
+                    className="accent-gold w-4 h-4"
+                  />
+                  <span className="font-display" style={{ color: col }}>
+                    {pg.personnage.Nom}
+                  </span>
+                </label>
+                <div className="text-sm">{pg.metiers.join(' · ')}</div>
+                {pg.metiers.map((m) => {
+                  const eq = reference.equipements[m];
+                  if (!eq) return null;
+                  return (
+                    <div key={m} className="text-sm text-parchment/50">
+                      {m} : {eq.outil} · {eq.accessoire1} · {eq.accessoire2}
+                    </div>
+                  );
+                })}
               </div>
             );
           })}
-          {cueilleurs.length === 0 && <div className="text-sm text-parchment/50">Aucun cueilleur.</div>}
+          {pickeurs.length === 0 && <div className="text-sm text-parchment/50">Aucun cueilleur.</div>}
         </div>
       </section>
 
       <section>
-        <h2 className="font-display text-gold mb-2">📊 Compteur total &amp; cueilleurs</h2>
+        <h2 className="font-display text-gold mb-2">📊 Compteur cueilleurs actifs &amp; total</h2>
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Métier</TableHead>
-              <TableHead>Total</TableHead>
-              <TableHead>Cueilleurs</TableHead>
+              <TableHead>Cueilleurs actifs</TableHead>
+              <TableHead>Total (actifs + crafteurs)</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {compteurs.map((c) => (
               <TableRow key={c.metier}>
                 <TableCell className="font-display text-gold">{c.metier}</TableCell>
+                <TableCell>{c.cueilleursActifs}</TableCell>
                 <TableCell>{c.total}</TableCell>
-                <TableCell>{c.cueilleurs}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -149,7 +166,7 @@ export function MetiersPage() {
               <tr>
                 <th className="py-1 pr-3 text-left text-parchment/60">Race</th>
                 {Object.keys(reference.equipements).map((m) => (
-                  <th key={m} className="py-1 px-2 text-parchment/60 text-xs">
+                  <th key={m} className="py-1 px-2 text-parchment/60 text-sm">
                     {m}
                   </th>
                 ))}
@@ -184,7 +201,7 @@ export function MetiersPage() {
             {sansMetier.map((c) => (
               <span
                 key={c.Nom}
-                className="text-xs border border-border rounded px-2 py-1"
+                className="text-sm border border-border rounded px-2 py-1"
                 style={{ color: CLASS_COLORS[c.Classe] || '#C8A84B' }}
               >
                 {c.Nom} ({c.Classe})

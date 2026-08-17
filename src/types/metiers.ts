@@ -9,7 +9,10 @@ export interface MetiersReference {
   bonusRaciaux: Record<string, string[]>;
 }
 
-export type MetiersAssignations = Record<string, string[]>;
+export interface MetiersAssignations {
+  crafteurs: Record<string, string[]>;
+  pickeursInactifs: string[];
+}
 
 export interface BuildEntry {
   spe: string;

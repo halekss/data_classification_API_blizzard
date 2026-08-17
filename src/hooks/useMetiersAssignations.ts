@@ -4,8 +4,10 @@ import type { MetiersAssignations } from '@/types/metiers';
 
 type Status = 'loading' | 'ok' | 'error';
 
+const EMPTY: MetiersAssignations = { crafteurs: {}, pickeursInactifs: [] };
+
 export function useMetiersAssignations() {
-  const [assignations, setAssignations] = useState<MetiersAssignations>({});
+  const [assignations, setAssignations] = useState<MetiersAssignations>(EMPTY);
   const [status, setStatus] = useState<Status>('loading');
 
   useEffect(() => {
@@ -23,15 +25,25 @@ export function useMetiersAssignations() {
 
   const toggleRole = useCallback((nom: string, metier: string) => {
     setAssignations((prev) => {
-      const current = prev[nom] || [];
+      const current = prev.crafteurs[nom] || [];
       const isCrafteur = current.includes(metier);
       const nextForNom = isCrafteur ? current.filter((m) => m !== metier) : [...current, metier];
-      const next = { ...prev };
-      if (nextForNom.length > 0) next[nom] = nextForNom;
-      else delete next[nom];
-      return next;
+      const nextCrafteurs = { ...prev.crafteurs };
+      if (nextForNom.length > 0) nextCrafteurs[nom] = nextForNom;
+      else delete nextCrafteurs[nom];
+      return { ...prev, crafteurs: nextCrafteurs };
     });
   }, []);
 
-  return { assignations, status, toggleRole };
+  const toggleActif = useCallback((nom: string) => {
+    setAssignations((prev) => {
+      const isInactif = prev.pickeursInactifs.includes(nom);
+      const nextInactifs = isInactif
+        ? prev.pickeursInactifs.filter((n) => n !== nom)
+        : [...prev.pickeursInactifs, nom];
+      return { ...prev, pickeursInactifs: nextInactifs };
+    });
+  }, []);
+
+  return { assignations, status, toggleRole, toggleActif };
 }

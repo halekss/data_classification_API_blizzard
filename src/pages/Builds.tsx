@@ -41,40 +41,42 @@ export function BuildsPage() {
         const col = CLASS_COLORS[cl] || '#C8A84B';
         return (
           <section key={cl}>
-            <h2 className="font-display mb-2" style={{ color: col }}>
+            <h2 className="font-display text-lg mb-3" style={{ color: col }}>
               {cl}
             </h2>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {builds[cl].map((entry) => (
                 <div
                   key={entry.spe}
-                  className="flex flex-wrap items-center gap-3 border border-border rounded p-3"
+                  className="flex flex-wrap items-center justify-between gap-4 border border-border rounded p-4"
                 >
-                  <div className="w-32 font-display">{entry.spe}</div>
-                  <a
-                    className="text-xs border border-gold text-gold rounded px-2 py-1 hover:bg-gold/10"
-                    href={entry.build}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Build
-                  </a>
-                  <a
-                    className="text-xs border border-gold text-gold rounded px-2 py-1 hover:bg-gold/10"
-                    href={entry.rotation}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Rotation
-                  </a>
-                  <a
-                    className="text-xs border border-gold text-gold rounded px-2 py-1 hover:bg-gold/10"
-                    href={entry.stats}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Stats
-                  </a>
+                  <div className="font-display text-base">{entry.spe}</div>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      className="text-sm border border-gold text-gold rounded px-4 py-2 hover:bg-gold/10 transition-colors"
+                      href={entry.build}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Build
+                    </a>
+                    <a
+                      className="text-sm border border-gold text-gold rounded px-4 py-2 hover:bg-gold/10 transition-colors"
+                      href={entry.rotation}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Rotation
+                    </a>
+                    <a
+                      className="text-sm border border-gold text-gold rounded px-4 py-2 hover:bg-gold/10 transition-colors"
+                      href={entry.stats}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Stats
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>

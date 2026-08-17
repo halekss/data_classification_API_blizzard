@@ -48,11 +48,11 @@ export function FilterBar({
           </option>
         ))}
       </select>
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-7 justify-items-start gap-2">
         {classes.map((cl) => (
           <button
             key={cl}
-            className={`px-3 py-1 rounded border text-sm ${
+            className={`px-2.5 py-1 rounded border text-sm whitespace-nowrap ${
               selectedClasses.has(cl) ? 'bg-gold/20 border-gold' : 'border-border'
             }`}
             style={{ color: CLASS_COLORS[cl] || '#888' }}

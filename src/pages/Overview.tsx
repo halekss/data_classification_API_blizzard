@@ -44,14 +44,14 @@ export function OverviewPage() {
             <div className="text-sm text-parchment/70">
               {champion.Classe} · {champion.Race} · Niv.{champion.Niveau}
             </div>
-            <div className="text-xs text-parchment/50 mt-1">
+            <div className="text-sm text-parchment/50 mt-1">
               {champion['Métier 1']}
               {champion['Métier 2'] !== 'Aucun' ? ' / ' + champion['Métier 2'] : ''}
             </div>
           </div>
           <div className="text-right">
             <div className="text-3xl font-display text-gold">{champion.iLvl}</div>
-            <div className="text-xs text-parchment/60">iLvl</div>
+            <div className="text-sm text-parchment/60">iLvl</div>
           </div>
         </div>
       </section>
@@ -71,7 +71,7 @@ export function OverviewPage() {
           {levels.map(([lvl, cnt]) => (
             <div key={lvl} className="border border-border rounded p-3 text-center">
               <div className="text-xl font-display text-gold">{lvl}</div>
-              <div className="text-xs text-parchment/60">
+              <div className="text-sm text-parchment/60">
                 {cnt} perso{cnt > 1 ? 's' : ''}
               </div>
             </div>
