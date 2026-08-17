@@ -37,30 +37,6 @@ export function MetiersPage() {
       </button>
 
       <section>
-        <h2 className="font-display text-gold mb-2">🛠 Équipements métiers</h2>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Métier</TableHead>
-              <TableHead>Outil</TableHead>
-              <TableHead>Accessoire 1</TableHead>
-              <TableHead>Accessoire 2</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {Object.entries(reference.equipements).map(([metier, eq]) => (
-              <TableRow key={metier}>
-                <TableCell className="font-display text-gold">{metier}</TableCell>
-                <TableCell>{eq.outil}</TableCell>
-                <TableCell>{eq.accessoire1}</TableCell>
-                <TableCell>{eq.accessoire2}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </section>
-
-      <section>
         <h2 className="font-display text-gold mb-2">⭐ Crafteurs</h2>
         <p className="text-sm text-parchment/50 mb-2">Métier de craft fixe — toujours comptés, pas de saisonnalité.</p>
         <div className="space-y-2">
@@ -95,9 +71,6 @@ export function MetiersPage() {
 
       <section>
         <h2 className="font-display text-gold mb-2">🌿 Pickeurs</h2>
-        <p className="text-sm text-parchment/50 mb-2">
-          Décoche un personnage que tu ne joues plus cette saison pour le retirer du compteur de cueilleurs actifs.
-        </p>
         <div className="space-y-2">
           {pickeurs.map((pg) => {
             const col = CLASS_COLORS[pg.personnage.Classe] || '#C8A84B';
@@ -152,6 +125,30 @@ export function MetiersPage() {
                 <TableCell className="font-display text-gold">{c.metier}</TableCell>
                 <TableCell>{c.cueilleursActifs}</TableCell>
                 <TableCell>{c.total}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </section>
+
+      <section>
+        <h2 className="font-display text-gold mb-2">🛠 Équipements métiers</h2>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Métier</TableHead>
+              <TableHead>Outil</TableHead>
+              <TableHead>Accessoire 1</TableHead>
+              <TableHead>Accessoire 2</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Object.entries(reference.equipements).map(([metier, eq]) => (
+              <TableRow key={metier}>
+                <TableCell className="font-display text-gold">{metier}</TableCell>
+                <TableCell>{eq.outil}</TableCell>
+                <TableCell>{eq.accessoire1}</TableCell>
+                <TableCell>{eq.accessoire2}</TableCell>
               </TableRow>
             ))}
           </TableBody>

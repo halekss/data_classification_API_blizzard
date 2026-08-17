@@ -1,12 +1,55 @@
 {
-  "crafteurs": { 
-    "Daarken": ["Enchantement"],
-    "Furaya": ["Forge"],
-    "Havväh": ["Forge"],
-    "Phéniraë": ["Enchantement"],
-    "Rengarh": ["Travail du cuir"],
-    "Scindios": ["Travail du cuir"],
-    "Sharelys": ["Calligraphie"]
+  "crafteurs": {
+    "Daarken": [
+      "Enchantement"
+    ],
+    "Furaya": [
+      "Forge"
+    ],
+    "Havväh": [
+      "Forge"
+    ],
+    "Phéniraë": [
+      "Enchantement"
+    ],
+    "Rengarh": [
+      "Travail du cuir"
+    ],
+    "Scindios": [
+      "Travail du cuir"
+    ],
+    "Sharelys": [
+      "Calligraphie"
+    ]
   },
-  "pickeursInactifs": []
+  "pickeursInactifs": [
+    "Ævanreth",
+    "Barloud",
+    "Bélyal",
+    "Blaîr",
+    "Daarken",
+    "Durmbaur",
+    "Élizabeth",
+    "Êv",
+    "Furaya",
+    "Giin",
+    "Havväh",
+    "Karkua",
+    "Kayssée",
+    "Khör",
+    "Linilym",
+    "Lylìth",
+    "Névègosa",
+    "Pandréa",
+    "Phéniraë",
+    "Ranulia",
+    "Rengarh",
+    "Rytaa",
+    "Scarêvansse",
+    "Sélunée",
+    "Sharelys",
+    "Tryxi",
+    "Vrenfel",
+    "Wombaji"
+  ]
 }
