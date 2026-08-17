@@ -1,4 +1,12 @@
 {
-  "crafteurs": { "Daarken": ["Enchantement"] },
+  "crafteurs": { 
+    "Daarken": ["Enchantement"],
+    "Furaya": ["Forge"],
+    "Havväh": ["Forge"],
+    "Phéniraë": ["Enchantement"],
+    "Rengarh": ["Travail du cuir"],
+    "Scindios": ["Travail du cuir"],
+    "Sharelys": ["Calligraphie"]
+  },
   "pickeursInactifs": []
 }
