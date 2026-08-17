@@ -1,1 +1,68 @@
-{}
+{
+  "Chaman": [
+    { "spe": "Elemental", "build": "https://www.wowhead.com/guide/classes/shaman/elemental/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/shaman/elemental/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/shaman/elemental/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Enhancement", "build": "https://www.wowhead.com/guide/classes/shaman/enhancement/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/shaman/enhancement/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/shaman/enhancement/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Restoration", "build": "https://www.wowhead.com/guide/classes/shaman/restoration/talent-builds-pve-healer", "rotation": "https://www.wowhead.com/guide/classes/shaman/restoration/rotation-cooldowns-pve-healer", "stats": "https://www.wowhead.com/guide/classes/shaman/restoration/stat-priority-pve-healer#stat-recommendations" }
+  ],
+  "Chasseur": [
+    { "spe": "Beast Mastery", "build": "https://www.wowhead.com/guide/classes/hunter/beast-mastery/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/hunter/beast-mastery/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/hunter/beast-mastery/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Marksmanship", "build": "https://www.wowhead.com/guide/classes/hunter/marksmanship/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/hunter/marksmanship/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/hunter/marksmanship/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Survival", "build": "https://www.wowhead.com/guide/classes/hunter/survival/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/hunter/survival/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/hunter/survival/stat-priority-pve-dps#stat-recommendations" }
+  ],
+  "Chasseur de démons": [
+    { "spe": "Devourer", "build": "https://www.wowhead.com/guide/classes/demon-hunter/devourer/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/demon-hunter/devourer/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/demon-hunter/devourer/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Havoc", "build": "https://www.wowhead.com/guide/classes/demon-hunter/havoc/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/demon-hunter/havoc/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/demon-hunter/havoc/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Vengeance", "build": "https://www.wowhead.com/guide/classes/demon-hunter/vengeance/talent-builds-pve-tank", "rotation": "https://www.wowhead.com/guide/classes/demon-hunter/vengeance/rotation-cooldowns-pve-tank", "stats": "https://www.wowhead.com/guide/classes/demon-hunter/vengeance/stat-priority-pve-tank#stat-recommendations" }
+  ],
+  "Chevalier de la mort": [
+    { "spe": "Blood", "build": "https://www.wowhead.com/guide/classes/death-knight/blood/talent-builds-pve-tank", "rotation": "https://www.wowhead.com/guide/classes/death-knight/blood/rotation-cooldowns-pve-tank", "stats": "https://www.wowhead.com/guide/classes/death-knight/blood/stat-priority-pve-tank#stat-recommendations" },
+    { "spe": "Frost", "build": "https://www.wowhead.com/guide/classes/death-knight/frost/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/death-knight/frost/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/death-knight/frost/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Unholy", "build": "https://www.wowhead.com/guide/classes/death-knight/unholy/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/death-knight/unholy/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/death-knight/unholy/stat-priority-pve-dps#stat-recommendations" }
+  ],
+  "Démoniste": [
+    { "spe": "Affliction", "build": "https://www.wowhead.com/guide/classes/warlock/affliction/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/warlock/affliction/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/warlock/affliction/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Demonology", "build": "https://www.wowhead.com/guide/classes/warlock/demonology/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/warlock/demonology/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/warlock/demonology/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Destruction", "build": "https://www.wowhead.com/guide/classes/warlock/destruction/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/warlock/destruction/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/warlock/destruction/stat-priority-pve-dps#stat-recommendations" }
+  ],
+  "Druide": [
+    { "spe": "Balance", "build": "https://www.wowhead.com/guide/classes/druid/balance/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/druid/balance/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/druid/balance/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Feral", "build": "https://www.wowhead.com/guide/classes/druid/feral/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/druid/feral/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/druid/feral/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Guardian", "build": "https://www.wowhead.com/guide/classes/druid/guardian/talent-builds-pve-tank", "rotation": "https://www.wowhead.com/guide/classes/druid/guardian/rotation-cooldowns-pve-tank", "stats": "https://www.wowhead.com/guide/classes/druid/guardian/stat-priority-pve-tank#stat-recommendations" },
+    { "spe": "Restoration", "build": "https://www.wowhead.com/guide/classes/druid/restoration/talent-builds-pve-healer", "rotation": "https://www.wowhead.com/guide/classes/druid/restoration/rotation-cooldowns-pve-healer", "stats": "https://www.wowhead.com/guide/classes/druid/restoration/stat-priority-pve-healer#stat-recommendations" }
+  ],
+  "Évocateur": [
+    { "spe": "Augmentation", "build": "https://www.wowhead.com/guide/classes/evoker/augmentation/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/evoker/augmentation/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/evoker/augmentation/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Devastation", "build": "https://www.wowhead.com/guide/classes/evoker/devastation/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/evoker/devastation/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/evoker/devastation/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Preservation", "build": "https://www.wowhead.com/guide/classes/evoker/preservation/talent-builds-pve-healer", "rotation": "https://www.wowhead.com/guide/classes/evoker/preservation/rotation-cooldowns-pve-healer", "stats": "https://www.wowhead.com/guide/classes/evoker/preservation/stat-priority-pve-healer#stat-recommendations" }
+  ],
+  "Guerrier": [
+    { "spe": "Arms", "build": "https://www.wowhead.com/guide/classes/warrior/arms/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/warrior/arms/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/warrior/arms/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Fury", "build": "https://www.wowhead.com/guide/classes/warrior/fury/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/warrior/fury/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/warrior/fury/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Protection", "build": "https://www.wowhead.com/guide/classes/warrior/protection/talent-builds-pve-tank", "rotation": "https://www.wowhead.com/guide/classes/warrior/protection/rotation-cooldowns-pve-tank", "stats": "https://www.wowhead.com/guide/classes/warrior/protection/stat-priority-pve-tank#stat-recommendations" }
+  ],
+  "Mage": [
+    { "spe": "Arcane", "build": "https://www.wowhead.com/guide/classes/mage/arcane/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/mage/arcane/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/mage/arcane/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Fire", "build": "https://www.wowhead.com/guide/classes/mage/fire/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/mage/fire/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/mage/fire/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Frost", "build": "https://www.wowhead.com/guide/classes/mage/frost/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/mage/frost/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/mage/frost/stat-priority-pve-dps#stat-recommendations" }
+  ],
+  "Moine": [
+    { "spe": "Brewmaster", "build": "https://www.wowhead.com/guide/classes/monk/brewmaster/talent-builds-pve-tank", "rotation": "https://www.wowhead.com/guide/classes/monk/brewmaster/rotation-cooldowns-pve-tank", "stats": "https://www.wowhead.com/guide/classes/monk/brewmaster/stat-priority-pve-tank#stat-recommendations" },
+    { "spe": "Mistweaver", "build": "https://www.wowhead.com/guide/classes/monk/mistweaver/talent-builds-pve-healer", "rotation": "https://www.wowhead.com/guide/classes/monk/mistweaver/rotation-cooldowns-pve-healer", "stats": "https://www.wowhead.com/guide/classes/monk/mistweaver/stat-priority-pve-healer#stat-recommendations" },
+    { "spe": "Windwalker", "build": "https://www.wowhead.com/guide/classes/monk/windwalker/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/monk/windwalker/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/monk/windwalker/stat-priority-pve-dps#stat-recommendations" }
+  ],
+  "Paladin": [
+    { "spe": "Holy", "build": "https://www.wowhead.com/guide/classes/paladin/holy/talent-builds-pve-healer", "rotation": "https://www.wowhead.com/guide/classes/paladin/holy/rotation-cooldowns-pve-healer", "stats": "https://www.wowhead.com/guide/classes/paladin/holy/stat-priority-pve-healer#stat-recommendations" },
+    { "spe": "Protection", "build": "https://www.wowhead.com/guide/classes/paladin/protection/talent-builds-pve-tank", "rotation": "https://www.wowhead.com/guide/classes/paladin/protection/rotation-cooldowns-pve-tank", "stats": "https://www.wowhead.com/guide/classes/paladin/protection/stat-priority-pve-tank#stat-recommendations" },
+    { "spe": "Retribution", "build": "https://www.wowhead.com/guide/classes/paladin/retribution/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/paladin/retribution/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/paladin/retribution/stat-priority-pve-dps#stat-recommendations" }
+  ],
+  "Prêtre": [
+    { "spe": "Discipline", "build": "https://www.wowhead.com/guide/classes/priest/discipline/talent-builds-pve-healer", "rotation": "https://www.wowhead.com/guide/classes/priest/discipline/rotation-cooldowns-pve-healer", "stats": "https://www.wowhead.com/guide/classes/priest/discipline/stat-priority-pve-healer#stat-recommendations" },
+    { "spe": "Holy", "build": "https://www.wowhead.com/guide/classes/priest/holy/talent-builds-pve-healer", "rotation": "https://www.wowhead.com/guide/classes/priest/holy/rotation-cooldowns-pve-healer", "stats": "https://www.wowhead.com/guide/classes/priest/holy/stat-priority-pve-healer#stat-recommendations" },
+    { "spe": "Shadow", "build": "https://www.wowhead.com/guide/classes/priest/shadow/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/priest/shadow/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/priest/shadow/stat-priority-pve-dps#stat-recommendations" }
+  ],
+  "Voleur": [
+    { "spe": "Assassination", "build": "https://www.wowhead.com/guide/classes/rogue/assassination/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/rogue/assassination/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/rogue/assassination/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Outlaw", "build": "https://www.wowhead.com/guide/classes/rogue/outlaw/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/rogue/outlaw/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/rogue/outlaw/stat-priority-pve-dps#stat-recommendations" },
+    { "spe": "Subtlety", "build": "https://www.wowhead.com/guide/classes/rogue/subtlety/talent-builds-pve-dps", "rotation": "https://www.wowhead.com/guide/classes/rogue/subtlety/rotation-cooldowns-pve-dps", "stats": "https://www.wowhead.com/guide/classes/rogue/subtlety/stat-priority-pve-dps#stat-recommendations" }
+  ]
+}
