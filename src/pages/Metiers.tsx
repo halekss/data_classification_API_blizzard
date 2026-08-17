@@ -13,7 +13,7 @@ export function MetiersPage() {
 
   if (rosterStatus === 'loading' || refStatus === 'loading' || assignStatus === 'loading')
     return <div>Chargement...</div>;
-  if (rosterStatus === 'error' || !reference)
+  if (rosterStatus === 'error' || assignStatus === 'error' || !reference)
     return <div>Impossible de charger les données métiers.</div>;
 
   const sansMetier = personnesSansMetier(data);

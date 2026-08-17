@@ -14,6 +14,8 @@ export async function exportAssignations(assignations: MetiersAssignations): Pro
   const a = document.createElement('a');
   a.href = url;
   a.download = 'metiers_assignations.json';
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(url);
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
 }
