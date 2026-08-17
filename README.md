@@ -12,7 +12,7 @@ La source de données est l'API Battle.net de Blizzard. Les entités collectées
 | Traitement | `pandas` |
 | Orchestration | GitHub Actions (prod) · Apache Airflow + Docker (option locale) |
 | Stockage | CSV versionné sur GitHub |
-| Visualisation | Dashboard HTML/CSS/JS vanilla, lecture CSV distante |
+| Visualisation | Dashboard React + Vite + Tailwind + shadcn/ui, lecture CSV/JSON distante (raw GitHub) |
 | Déploiement | GitHub Pages |
 
 ## Ce que le pipeline fait
@@ -33,13 +33,17 @@ La source de données est l'API Battle.net de Blizzard. Les entités collectées
 │       └── main.yml          # Pipeline CI/CD — collecte et commit quotidiens
 ├── dags/
 │   └── wow_export_dag.py     # DAG Airflow (orchestration locale alternative)
+├── src/                       # Dashboard React (pages, composants, hooks, contexte roster)
 ├── data/
-│   └── mon_dataset_wow.csv   # Dataset généré automatiquement
+│   ├── mon_dataset_wow.csv    # Dataset généré automatiquement
+│   ├── metiers_reference.json # Équipements métiers + bonus raciaux (référence statique)
+│   ├── metiers_assignations.json # Rôles crafteur/cueilleur par personnage
+│   └── builds_wowhead.json    # Liens Wowhead par classe + spécialisation
 ├── scripts/
 │   ├── config.py             # Paramètres, credentials via variables d'environnement
 │   └── requetage_one.py      # Script de collecte et traitement
 ├── docker-compose.yaml       # Stack Airflow locale
-└── index.html                # Dashboard web
+├── index.html                 # Entrée Vite
 ```
 
 ## Orchestration
@@ -71,6 +75,15 @@ https://halekss.github.io/data_classification_API_blizzard/
 ```
 
 Rafraîchissement automatique toutes les heures. Actualisation manuelle disponible en haut à droite.
+
+### Développement local
+
+```bash
+npm install
+npm run dev
+```
+
+Le serveur de dev sert `data/*.csv|json` directement depuis la racine du repo — aucune configuration supplémentaire nécessaire.
 
 En local : 
 

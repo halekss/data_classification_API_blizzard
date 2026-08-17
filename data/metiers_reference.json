@@ -1,0 +1,21 @@
+{
+  "equipements": {
+    "Calligraphie": { "outil": "Plume / Calligraphie", "accessoire1": "Loupe / Joaillerie", "accessoire2": "Lunettes / Joaillerie" },
+    "Couture": { "outil": "Ciseaux / Ingénieur", "accessoire1": "Aiguilles / Forge", "accessoire2": "Robe / Couture" },
+    "Dépeçage": { "outil": "Couteau / Forge", "accessoire1": "Coiffe / TDC", "accessoire2": "Sac / TDC" },
+    "Enchantement": { "outil": "Bâtonnet / Enchantement", "accessoire1": "Chapeau / Couture", "accessoire2": "Eclat / Joaillerie" },
+    "Forge": { "outil": "Marteau / Forge", "accessoire1": "Outils / Forge", "accessoire2": "Tablier / TDC" },
+    "Herboristerie": { "outil": "Faucille / Forge", "accessoire1": "Chapeau / Couture", "accessoire2": "Sac / TDC" },
+    "Minage": { "outil": "Pioche / Forge", "accessoire1": "Casque / Ingénieur", "accessoire2": "Sac / TDC" },
+    "Travail du cuir": { "outil": "Couteau / Forge", "accessoire1": "Outils / Forge", "accessoire2": "Tablier / TDC" }
+  },
+  "bonusRaciaux": {
+    "Tauren": ["Herboristerie"],
+    "Elfe de Sang": ["Enchantement"],
+    "Worgen": ["Dépeçage"],
+    "Tauren Haut-Roc": ["Couture", "Dépeçage", "Herboristerie", "Minage"],
+    "Kultirassiens": ["Couture", "Dépeçage", "Herboristerie", "Minage"],
+    "Dracthyrs/Evoker": ["Enchantement", "Minage"],
+    "Terrestres": ["Couture", "Dépeçage", "Herboristerie", "Minage"]
+  }
+}

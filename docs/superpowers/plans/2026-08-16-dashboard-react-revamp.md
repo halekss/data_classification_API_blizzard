@@ -1310,21 +1310,23 @@ git commit -m "feat: add faction/race/class filters to Classes page"
     "Dépeçage": { "outil": "Couteau / Forge", "accessoire1": "Coiffe / TDC", "accessoire2": "Sac / TDC" },
     "Enchantement": { "outil": "Bâtonnet / Enchantement", "accessoire1": "Chapeau / Couture", "accessoire2": "Eclat / Joaillerie" },
     "Forge": { "outil": "Marteau / Forge", "accessoire1": "Outils / Forge", "accessoire2": "Tablier / TDC" },
-    "Herboriste": { "outil": "Faucille / Forge", "accessoire1": "Chapeau / Couture", "accessoire2": "Sac / TDC" },
+    "Herboristerie": { "outil": "Faucille / Forge", "accessoire1": "Chapeau / Couture", "accessoire2": "Sac / TDC" },
     "Minage": { "outil": "Pioche / Forge", "accessoire1": "Casque / Ingénieur", "accessoire2": "Sac / TDC" },
-    "TDC": { "outil": "Couteau / Forge", "accessoire1": "Outils / Forge", "accessoire2": "Tablier / TDC" }
+    "Travail du cuir": { "outil": "Couteau / Forge", "accessoire1": "Outils / Forge", "accessoire2": "Tablier / TDC" }
   },
   "bonusRaciaux": {
-    "Tauren": ["Herboriste"],
+    "Tauren": ["Herboristerie"],
     "Elfe de Sang": ["Enchantement"],
     "Worgen": ["Dépeçage"],
-    "Tauren Haut-Roc": ["Couture", "Dépeçage", "Herboriste", "Minage"],
-    "Kultirassiens": ["Couture", "Dépeçage", "Herboriste", "Minage"],
+    "Tauren Haut-Roc": ["Couture", "Dépeçage", "Herboristerie", "Minage"],
+    "Kultirassiens": ["Couture", "Dépeçage", "Herboristerie", "Minage"],
     "Dracthyrs/Evoker": ["Enchantement", "Minage"],
-    "Terrestres": ["Couture", "Dépeçage", "Herboriste", "Minage"]
+    "Terrestres": ["Couture", "Dépeçage", "Herboristerie", "Minage"]
   }
 }
 ```
+
+> Renommé depuis la transcription initiale de la capture d'écran : `"Herboriste"` → `"Herboristerie"` et `"TDC"` → `"Travail du cuir"`, pour matcher exactement les valeurs de profession telles qu'elles apparaissent dans `HARVEST`/`CRAFT` (Task 3) et dans le CSV — sinon `reference.equipements[pm.metier]` ne trouverait jamais l'entrée correspondante pour ces deux métiers.
 
 > Retranscrit depuis `screens/Capture d'écran 2026-08-16 221953.png`. **À vérifier par l'utilisateur** avant de committer les assignations réelles — l'implémentation fonctionne quelles que soient les valeurs exactes.
 
@@ -1920,7 +1922,7 @@ git commit -m "feat: implement Builds page"
 
 **Files:**
 - Create: `src/layout/PageTransition.tsx`
-- Modify: `src/layout/Layout.tsx`, `src/App.tsx`, `src/pages/Roster.tsx`, `src/pages/Classes.tsx`
+- Modify: `src/App.tsx`, `src/pages/Roster.tsx`, `src/components/BarRow.tsx`
 
 **Interfaces:**
 - Produces: `PageTransition` wrapper component used by `App.tsx` around routed pages.
