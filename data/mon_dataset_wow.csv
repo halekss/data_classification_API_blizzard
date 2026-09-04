@@ -1,11 +1,12 @@
 Nom,Niveau,Classe,Race,Faction,iLvl,Métier 1,Métier 2
-Feuraluyn,90,Druide,Elfe de la nuit,Alliance,306,Dépeçage,Herboristerie
-Kakumô,90,Chaman,Troll,Horde,304,Minage,Couture
-Chutétoile,90,Démoniste,Draeneï sancteforge,Alliance,302,Herboristerie,Couture
-Haghéra,90,Chevalier de la mort,Humain,Alliance,301,Dépeçage,Minage
+Feuraluyn,90,Druide,Elfe de la nuit,Alliance,307,Dépeçage,Herboristerie
+Kakumô,90,Chaman,Troll,Horde,306,Minage,Couture
+Chutétoile,90,Démoniste,Draeneï sancteforge,Alliance,305,Herboristerie,Couture
+Haghéra,90,Chevalier de la mort,Humain,Alliance,304,Dépeçage,Minage
 Jakundar,90,Chasseur,Troll zandalari,Horde,301,Dépeçage,Couture
 Aryastrasza,90,Évocateur,Dracthyr,Horde,300,Herboristerie,Minage
 Scindios,90,Chasseur de démons,Elfe de sang,Horde,298,Dépeçage,Travail du cuir
+Phéniraë,90,Mage,Elfe de sang,Horde,283,Enchantement,Couture
 Kayssée,90,Moine,Vulpérin,Horde,274,Herboristerie,Couture
 Wombaji,90,Chevalier de la mort,Troll zandalari,Horde,272,Minage,Couture
 Êv,90,Paladin,Humain,Alliance,272,Herboristerie,Minage
@@ -13,7 +14,6 @@ Bélyal,90,Guerrier,Draeneï,Alliance,271,Dépeçage,Minage
 Vrenfel,90,Chasseur de démons,Elfe du Vide,Alliance,271,Dépeçage,Herboristerie
 Sharelys,90,Mage,Sacrenuit,Horde,270,Herboristerie,Calligraphie
 Pandréa,90,Démoniste,Dracthyr,Horde,269,Enchantement,Couture
-Phéniraë,90,Mage,Elfe de sang,Horde,265,Enchantement,Couture
 Purités,90,Prêtre,Draeneï sancteforge,Alliance,263,Aucun,Aucun
 Sélunée,90,Druide,Haranir,Horde,259,Herboristerie,Minage
 Élizabeth,90,Voleur,Humain,Alliance,256,Dépeçage,Couture
