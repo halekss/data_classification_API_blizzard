@@ -2,16 +2,16 @@ Nom,Niveau,Classe,Race,Faction,iLvl,Métier 1,Métier 2
 Jakundar,90,Chasseur,Troll zandalari,Horde,307,Dépeçage,Couture
 Feuraluyn,90,Druide,Elfe de la nuit,Alliance,307,Dépeçage,Herboristerie
 Kakumô,90,Chaman,Troll,Horde,306,Minage,Couture
-Chutétoile,90,Démoniste,Draeneï sancteforge,Alliance,305,Herboristerie,Couture
 Haghéra,90,Chevalier de la mort,Humain,Alliance,305,Dépeçage,Minage
-Aryastrasza,90,Évocateur,Dracthyr,Horde,302,Herboristerie,Minage
-Scindios,90,Chasseur de démons,Elfe de sang,Horde,302,Dépeçage,Travail du cuir
+Chutétoile,90,Démoniste,Draeneï sancteforge,Alliance,305,Herboristerie,Couture
+Scindios,90,Chasseur de démons,Elfe de sang,Horde,304,Dépeçage,Travail du cuir
+Aryastrasza,90,Évocateur,Dracthyr,Horde,304,Herboristerie,Minage
 Phéniraë,90,Mage,Elfe de sang,Horde,283,Enchantement,Couture
 Kayssée,90,Moine,Vulpérin,Horde,274,Herboristerie,Couture
-Wombaji,90,Chevalier de la mort,Troll zandalari,Horde,272,Minage,Couture
 Êv,90,Paladin,Humain,Alliance,272,Herboristerie,Minage
-Bélyal,90,Guerrier,Draeneï,Alliance,271,Dépeçage,Minage
+Wombaji,90,Chevalier de la mort,Troll zandalari,Horde,272,Minage,Couture
 Vrenfel,90,Chasseur de démons,Elfe du Vide,Alliance,271,Dépeçage,Herboristerie
+Bélyal,90,Guerrier,Draeneï,Alliance,271,Dépeçage,Minage
 Sharelys,90,Mage,Sacrenuit,Horde,270,Herboristerie,Calligraphie
 Pandréa,90,Démoniste,Dracthyr,Horde,269,Enchantement,Couture
 Purités,90,Prêtre,Draeneï sancteforge,Alliance,263,Aucun,Aucun
@@ -28,32 +28,33 @@ Narîdia,90,Chaman,Draeneï,Alliance,169,Aucun,Aucun
 Akané,90,Moine,Humain,Alliance,153,Aucun,Aucun
 Furaya,82,Paladin,Draeneï sancteforge,Alliance,136,Forge,Minage
 Havväh,81,Moine,Draeneï sancteforge,Alliance,143,Forge,Minage
-Rengarh,81,Chasseur,Worgen,Alliance,127,Dépeçage,Travail du cuir
 Elundris,81,Druide,Elfe de la nuit,Alliance,77,Aucun,Aucun
-Daarken,80,Démoniste,Elfe de sang,Horde,140,Enchantement,Couture
+Rengarh,81,Chasseur,Worgen,Alliance,127,Dépeçage,Travail du cuir
 Nymphaë,80,Chasseur,Elfe de la nuit,Alliance,140,Aucun,Aucun
+Daarken,80,Démoniste,Elfe de sang,Horde,140,Enchantement,Couture
+Annahilahay,80,Paladin,Elfe de sang,Horde,140,Aucun,Aucun
 Neekrad,80,Prêtre,Elfe du Vide,Alliance,141,Aucun,Aucun
-Blaîr,80,Druide,Worgen,Alliance,133,Dépeçage,Herboristerie
 Séphine,80,Prêtre,Mort-vivant,Horde,132,Aucun,Aucun
-Ævanreth,80,Guerrier,Elfe du Vide,Alliance,130,Dépeçage,Minage
 Shiden,80,Paladin,Draeneï,Alliance,130,Aucun,Aucun
 Barloud,80,Voleur,Kultirassien,Alliance,130,Herboristerie,Couture
-Névègosa,80,Évocateur,Dracthyr,Alliance,129,Herboristerie,Minage
-Annahilahay,80,Paladin,Elfe de sang,Horde,140,Aucun,Aucun
-Scarêvansse,80,Chasseur de démons,Elfe de la nuit,Alliance,138,Dépeçage,Minage
-Héphastrasza,80,Guerrier,Dracthyr,Horde,128,Aucun,Aucun
+Ævanreth,80,Guerrier,Elfe du Vide,Alliance,130,Dépeçage,Minage
 Nasharz,80,Mage,Elfe de la nuit,Alliance,129,Aucun,Aucun
-Gydera,80,Chasseur,Dracthyr,Alliance,128,Aucun,Aucun
+Névègosa,80,Évocateur,Dracthyr,Alliance,129,Herboristerie,Minage
+Scarêvansse,80,Chasseur de démons,Elfe de la nuit,Alliance,138,Dépeçage,Minage
+Blaîr,80,Druide,Worgen,Alliance,133,Dépeçage,Herboristerie
+Héphastrasza,80,Guerrier,Dracthyr,Horde,128,Aucun,Aucun
 Absolya,80,Prêtre,Dracthyr,Horde,128,Aucun,Aucun
-Rytaa,80,Chaman,Vulpérin,Horde,126,Dépeçage,Minage
+Khör,80,Guerrier,Orc,Horde,127,Dépeçage,Minage
+Gydera,80,Chasseur,Dracthyr,Alliance,128,Aucun,Aucun
 Linilym,80,Démoniste,Draeneï,Alliance,126,Enchantement,Couture
 Ékorce,80,Druide,Tauren de Haut-Roc,Horde,125,Aucun,Aucun
-Khör,80,Guerrier,Orc,Horde,127,Dépeçage,Minage
 Karkua,80,Druide,Troll zandalari,Horde,125,Herboristerie,Minage
-Synestrah,80,Voleur,Elfe du Vide,Alliance,124,Aucun,Aucun
-Lylìth,80,Chevalier de la mort,Elfe du Vide,Alliance,123,Enchantement,Minage
+Rytaa,80,Chaman,Vulpérin,Horde,126,Dépeçage,Minage
 Tryxi,80,Voleur,Gobelin,Horde,124,Ingénierie,Minage
+Synestrah,80,Voleur,Elfe du Vide,Alliance,124,Aucun,Aucun
 Arcorror,80,Chevalier de la mort,Sacrenuit,Horde,122,Aucun,Aucun
+Lylìth,80,Chevalier de la mort,Elfe du Vide,Alliance,123,Enchantement,Minage
 Durmbaur,80,Druide,Tauren,Horde,118,Herboristerie,Minage
 Giin,80,Moine,Pandaren,Horde,117,Herboristerie,Couture
+Yrkah,10,Chaman,Orc,Horde,4,Aucun,Aucun
 Ëbal,10,Prêtre,Draeneï,Alliance,2,Aucun,Aucun
