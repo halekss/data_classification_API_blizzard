@@ -1,11 +1,12 @@
 Nom,Niveau,Classe,Race,Faction,iLvl,Métier 1,Métier 2
+Aryastrasza,90,Évocateur,Dracthyr,Horde,315,Herboristerie,Minage
 Chutétoile,90,Démoniste,Draeneï sancteforge,Alliance,315,Herboristerie,Couture
-Feuraluyn,90,Druide,Elfe de la nuit,Alliance,315,Dépeçage,Herboristerie
 Haghéra,90,Chevalier de la mort,Humain,Alliance,315,Dépeçage,Minage
-Aryastrasza,90,Évocateur,Dracthyr,Horde,314,Herboristerie,Minage
-Jakundar,90,Chasseur,Troll zandalari,Horde,314,Dépeçage,Couture
+Jakundar,90,Chasseur,Troll zandalari,Horde,315,Dépeçage,Couture
+Feuraluyn,90,Druide,Elfe de la nuit,Alliance,315,Dépeçage,Herboristerie
+Scindios,90,Chasseur de démons,Elfe de sang,Horde,314,Dépeçage,Travail du cuir
 Kakumô,90,Chaman,Troll,Horde,314,Minage,Couture
-Scindios,90,Chasseur de démons,Elfe de sang,Horde,313,Dépeçage,Travail du cuir
+Shiden,90,Paladin,Draeneï,Alliance,294,Aucun,Aucun
 Phéniraë,90,Mage,Elfe de sang,Horde,288,Enchantement,Couture
 Kayssée,90,Moine,Vulpérin,Horde,274,Herboristerie,Couture
 Êv,90,Paladin,Humain,Alliance,272,Herboristerie,Minage
@@ -26,7 +27,6 @@ Vajunko,90,Paladin,Troll zandalari,Horde,199,Aucun,Aucun
 Méduzah,90,Voleur,Vulpérin,Horde,188,Aucun,Aucun
 Narîdia,90,Chaman,Draeneï,Alliance,169,Aucun,Aucun
 Akané,90,Moine,Humain,Alliance,153,Aucun,Aucun
-Shiden,84,Paladin,Draeneï,Alliance,149,Aucun,Aucun
 Furaya,82,Paladin,Draeneï sancteforge,Alliance,136,Forge,Minage
 Havväh,81,Moine,Draeneï sancteforge,Alliance,143,Forge,Minage
 Rengarh,81,Chasseur,Worgen,Alliance,127,Dépeçage,Travail du cuir
