@@ -37,6 +37,7 @@ function serveDataDir(): Plugin {
 
 export default defineConfig({
   plugins: [react(), serveDataDir()],
+  server: { port: 5177 },
   base: '/data_classification_API_blizzard/',
   resolve: {
     alias: {
