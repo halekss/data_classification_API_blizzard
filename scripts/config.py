@@ -20,7 +20,7 @@ MES_PERSONNAGES = [
     ('Ëbal', 'les-sentinelles'),
     ('Ékorce', 'confrérie-du-thorium'),
     ('Elundris', 'les-sentinelles'),
-    ('Élériss,' 'confrérie-du-thorium'),
+    ('Élériss,', 'confrérie-du-thorium'),
     ('Élizabeth', 'les-sentinelles'),
     ('Êv', 'les-sentinelles'),
     ('Féshine', 'confrérie-du-thorium'),
